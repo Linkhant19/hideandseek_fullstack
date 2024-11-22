@@ -17,14 +17,22 @@ body {
     z-index: 1;
 }
 
-img {
-    width: 350px;
-    height: auto;
-}
-
 .card-list-item {
     flex-basis: 100px;
-    margin: 10px;
+    margin: 20px;
+    perspective: 1000px;  /* The perspective for my 3D effect */
+}
+
+.card-list-container img {
+    width: 350px;
+    height: auto;
+    transition: transform 0.5s ease; 
+    transform-origin: center; 
+}
+
+.card-list-container img:hover {
+    /* I got this hover inspiration from: https://codepen.io/gayane-gasparyan/pen/wvxewXO */
+    transform: perspective(1500px) translateY(-5%) rotateX(25deg) translateZ(0);
 }
   
 .background {
