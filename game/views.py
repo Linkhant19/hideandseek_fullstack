@@ -1,3 +1,27 @@
-from django.shortcuts import render
+# game/views.py
 
-# Create your views here.
+from typing import Any
+from django.shortcuts import render, redirect
+from django.urls import reverse
+
+from . models import *
+
+# i dont have forms yet
+# from . forms import *
+
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
+from django.contrib.auth.mixins import LoginRequiredMixin 
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.contrib.auth import login
+import random
+
+# creating my views
+
+class ShowAllCards(ListView):
+    '''
+    class-based view to show all cards, inherited from ListView.
+    '''
+    model = Card
+    template_name = 'game/show_all_cards.html'
+    context_object_name = 'cards'

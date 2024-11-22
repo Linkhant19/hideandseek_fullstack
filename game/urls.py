@@ -7,4 +7,5 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
+    path(r'', views.ShowAllCards.as_view(), name='show_all_cards'), # currently my main page
 ]

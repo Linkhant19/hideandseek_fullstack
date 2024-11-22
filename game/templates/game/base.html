@@ -1,0 +1,15 @@
+<!-- game/templates/base.html -->
+
+{% load static %}
+
+<html>
+    <head>
+        <title>Hide and Seek</title>
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+    </head>
+    <body>
+        {% block content %}
+        {% endblock %}
+    </body>
+    <script src="{% static 'script.js' %}"></script>
+</html>

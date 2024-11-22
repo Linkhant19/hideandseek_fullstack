@@ -77,7 +77,9 @@ class AddToDeck(models.Model):
 
     def __str__(self):
         ''' string representation of add to deck '''
-        if self.hider_class:
+        if self.hider_class and self.seeker_class:
+            return f'({self.card}) added to {self.hider_class} and {self.seeker_class}'
+        elif self.hider_class:
             return f'({self.card}) added to {self.hider_class}'
         elif self.seeker_class:
             return f'({self.card}) added to {self.seeker_class}'
@@ -101,7 +103,7 @@ class Game(models.Model):
 
     def __str__(self):
         ''' string representation of game '''
-        return f'{self.player} - {self.hider_class} - {self.seeker_class} - {self.current_turn}'
+        return f'{self.player} as {self.hider_class} against {self.seeker_class}. Turn: {self.current_turn}'
 
 
 
