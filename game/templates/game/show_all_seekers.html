@@ -1,0 +1,21 @@
+<!-- game/templates/game/show_all_seekers.html -->
+
+{% extends 'game/base.html' %}
+
+{% block content %}
+    <div class="background"></div>
+    <h1>SEEKERS</h1>
+    <ul>
+        <!-- ultimately, I will change the view design of the heroes to be different from cards. -->
+        <div class="heroes-container">
+            {% for seeker in seekers %}
+            <!-- show the image and name of the hero -->
+            <div class="hero">
+                <div class="heroes-item"><img src="{{ seeker.image.url }}" alt="{{ seeker.hero_name }}"></div>
+                <p class="heroes-name">{{ seeker.class_name }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </ul>
+    
+{% endblock %}

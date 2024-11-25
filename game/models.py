@@ -42,9 +42,11 @@ class Hider(models.Model):
     Hider model:
         class_name - name of class
         description - description of class
+        image - image of class
     '''
     class_name = models.CharField(max_length=100)
     description = models.TextField()
+    image = models.ImageField()
 
     def __str__(self):
         ''' string representation of Hider class '''
@@ -55,9 +57,11 @@ class Seeker(models.Model):
     Seeker model:
         class_name - name of class
         description - description of class
+        image - image of class
     '''
     class_name = models.CharField(max_length=100)
     description = models.TextField()
+    image = models.ImageField()
 
     def __str__(self):
         ''' string representation of Seeker class '''

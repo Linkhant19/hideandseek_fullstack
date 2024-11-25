@@ -26,3 +26,18 @@ class ShowAllCards(ListView):
     template_name = 'game/show_all_cards.html'
     context_object_name = 'cards'
 
+class ShowAllHiders(ListView):
+    '''
+    class-based view to show all heroes, inherited from ListView.
+    '''
+    model = Hider
+    template_name = 'game/show_all_hiders.html'
+    context_object_name = 'hiders'
+
+class ShowAllSeekers(ListView):
+    '''
+    class-based view to show all heroes, inherited from ListView.
+    '''
+    model = Seeker
+    template_name = 'game/show_all_seekers.html'
+    context_object_name = 'seekers'

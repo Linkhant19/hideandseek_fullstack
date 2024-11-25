@@ -8,4 +8,6 @@ from . import views
 
 urlpatterns = [
     path(r'', views.ShowAllCards.as_view(), name='show_all_cards'), # currently my main page
+    path(r'hiders/', views.ShowAllHiders.as_view(), name='show_all_hiders'), # page for showing all hiders
+    path(r'seekers/', views.ShowAllSeekers.as_view(), name='show_all_seekers'), # page for showing all seekers
 ]

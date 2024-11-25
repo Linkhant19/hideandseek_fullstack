@@ -13,12 +13,19 @@
                 <img src="{% static 'images/logo.png' %}" alt="logo">
                 <ul>
                     <li><a href="{% url 'show_all_cards' %}">All Cards</a></li>
-                    <li><a href="">All Heroes</a></li>
+                    <li><a href="{% url 'show_all_hiders' %}">Hiders</a></li>
+                    <li><a href="{% url 'show_all_seekers' %}">Seekers</a></li>
                     <li><a href="">Play Game</a></li>
                 </ul>
+                <!-- show profile picture if logged in. I will handle this later. -->
+                {% if user.is_authenticated %}
+                    <a class="profile-header" href="">Profile</a>
+                {% else %}
+                    <a class="profile-header" href="">Login</a>
+                {% endif %}
             </nav>
             
-            <!-- show profile picture if logged in. -->
+            
         </header>
         
         {% block content %}

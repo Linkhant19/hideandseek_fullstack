@@ -33,6 +33,10 @@ nav * {
     margin-top: 10px;
 }
 
+.profile-header {
+    margin-left: 485px;
+}
+
 h1 {
     text-align: center;
 }
@@ -61,6 +65,57 @@ h1 {
 }
 
 .card-list-container img:hover {
+    /* I got this hover inspiration from: https://codepen.io/gayane-gasparyan/pen/wvxewXO */
+    transform: perspective(1500px) translateY(-5%) rotateX(25deg) translateZ(0);
+}
+
+.heroes-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    z-index: 1;
+}
+
+.hero {
+    display: flex;
+    position: relative;
+    width: 400px; /* set a fixed width for the hero container */
+    margin: 20px;
+}
+
+.heroes-item {
+    position: relative; 
+}
+
+.heroes-item img {
+    width: 100%;
+    height: auto; 
+    opacity: 100%;
+    transition: 0.5s ease; 
+    transform-origin: center; 
+}
+
+.heroes-name {
+    position: absolute;
+    top: 0%; 
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 100px;
+    opacity: 0%;
+    transition: 1s;
+}
+
+.hero:hover .heroes-name {
+    opacity: 100%;
+    text-shadow: 0px 20px red;
+}
+
+.hero:hover .heroes-item img {
+    opacity: 20%;
     /* I got this hover inspiration from: https://codepen.io/gayane-gasparyan/pen/wvxewXO */
     transform: perspective(1500px) translateY(-5%) rotateX(25deg) translateZ(0);
 }
