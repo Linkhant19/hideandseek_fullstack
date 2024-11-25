@@ -1,4 +1,4 @@
-<!-- game/templates/base.html -->
+<!-- game/templates/game/base.html -->
 
 {% load static %}
 
@@ -8,8 +8,22 @@
         <link rel="stylesheet" href="{% static 'style.css' %}">
     </head>
     <body>
+        <header> 
+            <nav>
+                <img src="{% static 'images/logo.png' %}" alt="logo">
+                <ul>
+                    <li><a href="{% url 'show_all_cards' %}">All Cards</a></li>
+                    <li><a href="">All Heroes</a></li>
+                    <li><a href="">Play Game</a></li>
+                </ul>
+            </nav>
+            
+            <!-- show profile picture if logged in. -->
+        </header>
+        
         {% block content %}
         {% endblock %}
     </body>
-    <script src="{% static 'script.js' %}"></script>
+    <!-- gonna work on the script later. -->
+    <!-- <script src="{% static 'script.js' %}"></script> -->
 </html>

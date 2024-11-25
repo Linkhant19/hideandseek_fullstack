@@ -25,3 +25,4 @@ class ShowAllCards(ListView):
     model = Card
     template_name = 'game/show_all_cards.html'
     context_object_name = 'cards'
+
