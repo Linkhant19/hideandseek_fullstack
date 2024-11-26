@@ -26,6 +26,24 @@ class ShowAllCards(ListView):
     template_name = 'game/show_all_cards.html'
     context_object_name = 'cards'
 
+    def get_queryset(self):
+        '''
+        override get_queryset to order cards by card_type in get form
+        '''
+        qs = super().get_queryset()
+
+        # check if card_type is in request.GET --> returns cards of that type
+        if 'card_type' in self.request.GET:
+            card_type = self.request.GET['card_type']
+            qs = qs.filter(card_type__icontains=card_type)
+
+        # check if the card_name from request.GET matches first letters of card_name
+        if 'card_name' in self.request.GET:
+            card_name = self.request.GET['card_name']
+            qs = qs.filter(card_name__startswith=card_name)
+
+        return qs
+
 class ShowAllHiders(ListView):
     '''
     class-based view to show all heroes, inherited from ListView.
