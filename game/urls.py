@@ -12,4 +12,5 @@ urlpatterns = [
     path(r'seekers/', views.ShowAllSeekers.as_view(), name='show_all_seekers'), # page for showing all seekers
     path(r'hiders/<int:pk>', views.ShowHiderView.as_view(), name='show_hider'), # page for showing a specific hider
     path(r'seekers/<int:pk>', views.ShowSeekerView.as_view(), name='show_seeker'), # page for showing a specific seeker
+    path(r'game/', views.GameView.as_view(), name='game'), # page for showing a specific game
 ]
