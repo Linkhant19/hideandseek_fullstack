@@ -5,6 +5,13 @@
 {% block content %}
     <div class="background"></div>
     <h1>CARDS</h1>
+
+    <!-- my search bar -->
+    <div>
+        {% include 'game/search.html' %}
+    </div>
+
+
     <ul>
         <div class="card-list-container">
             {% for card in cards %}

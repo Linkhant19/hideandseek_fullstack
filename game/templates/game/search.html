@@ -1,0 +1,42 @@
+<!-- game/templates/game/search.html -->
+
+<div class="search-container">
+    <div class="search-form">
+        <h2>
+            Search
+            <br>
+            ଘ(∩^o^)⊃━☆:･ﾟ
+        </h2>
+
+        <form action="{% url 'show_all_cards' %}">
+            <table class="search-table">
+                <tr>
+                    <th>Card Type: </th>
+                    <!-- select card type . radio button
+                    * main
+                    * ability
+                    * signature
+                    * ultimate -->
+                    <td>
+                        <input type="radio" name="card_type" value="main">Main
+                        <input type="radio" name="card_type" value="ability">Ability
+                        <input type="radio" name="card_type" value="signature">Signature
+                        <input type="radio" name="card_type" value="ultimate">Ultimate
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Card Name: </th>
+                    <!-- search input -->
+                    <td><input type="text" name="card_name"></td>
+                </tr>
+
+                <!-- submit button -->
+                <tr>
+                    
+                </tr>
+            </table>
+            <input type="submit" value="Search">
+        </form>
+    </div>
+</div>

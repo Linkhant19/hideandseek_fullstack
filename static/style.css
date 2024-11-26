@@ -136,6 +136,66 @@ h1 {
     opacity: 100%;
     border: 7px inset black;
 }
+
+
+
+/* for search bar */
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+.search-form {
+    display: flex;
+    background-color: #fff;
+    padding: 20px;
+    padding-left: 400px;
+    padding-right: 400px;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-form h2 {
+    margin-right: 100px;
+    font-weight: normal;
+}
+
+.search-form input[type="text"] {
+    flex-grow: 1;
+    width: 300px;
+    border: none;
+    border-bottom: 1px solid black;
+    font-size: 16px;
+    padding: 5px;
+    margin-left: 9px;
+}
+
+.search-table td, th {
+    padding-bottom: 20px;
+    text-align: left;
+}
+
+.search-form input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    margin-left: 2px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+
+
   
 /* .background {
     position: fixed;
