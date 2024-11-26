@@ -50,6 +50,12 @@ class ShowHiderView(DetailView):
     template_name = 'game/show_hider.html'
     context_object_name = 'hider'
 
+    # I want to use AddToDeck model to show cards that are added to this Hider's deck
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['add_to_decks'] = AddToDeck.objects.filter(hider_class=self.object)
+        return context
+
 class ShowSeekerView(DetailView):
     '''
     class-based view called ShowSeekerView to show a specific seeker, inherited from DetailView.
@@ -57,3 +63,11 @@ class ShowSeekerView(DetailView):
     model = Seeker
     template_name = 'game/show_seeker.html'
     context_object_name = 'seeker'
+
+    # I want to use AddToDeck model to show cards that are added to this Seeker's deck
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['add_to_decks'] = AddToDeck.objects.filter(seeker_class=self.object)
+        return context
+
+    

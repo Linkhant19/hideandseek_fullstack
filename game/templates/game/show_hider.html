@@ -6,12 +6,24 @@
     <div class="background"></div>
     <h1>{{ hider.class_name }}</h1>
     <ul>
-        <div class="heroes-container">
-            <div class="hero">
-                <div class="heroes-item"><img src="{{ hider.image.url }}" alt="{{ hider.class_name }}"></div>
-                <p class="heroes-name">{{ hider.class_name }}</p>
+        <div>
+            <div class="one-hero-container">
+                <div><img src="{{ hider.image.url }}" alt="{{ hider.class_name }}"></div>
+                <div>
+                    <p>{{ hider.description }}</p>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta saepe quod consequuntur id eveniet iusto temporibus totam ullam, error facilis accusantium eaque accusamus quis. Tenetur animi aspernatur nesciunt dolorum aperiam?</p>
+
+                </div>
             </div>
         </div>
+        <!-- show all cards of the hider -->
+        <h1>Cards</h1>
+        <div class="card-list-container">
+            {% for hand in add_to_decks %}
+                <div class="card-list-item"><img src="{{ hand.card.image.url }}" alt="{{ card.card_name }}"></div>
+            {% endfor %}
+        </div>
+        
     </ul>
     
 {% endblock %}

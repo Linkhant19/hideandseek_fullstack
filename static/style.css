@@ -121,6 +121,21 @@ h1 {
     /* I got this hover inspiration from: https://codepen.io/gayane-gasparyan/pen/wvxewXO */
     transform: perspective(1500px) translateY(-5%) rotateX(45deg) translateZ(0);
 }
+
+.one-hero-container {
+    display: flex;
+    position: relative;
+    /* width: 400px; */
+    margin: 10px;
+    gap: 20px;
+}
+
+.one-hero-container img {
+    width: 500px;
+    height: auto; 
+    opacity: 100%;
+    border: 7px inset black;
+}
   
 /* .background {
     position: fixed;
