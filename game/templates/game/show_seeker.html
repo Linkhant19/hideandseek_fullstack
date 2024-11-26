@@ -1,0 +1,17 @@
+<!-- game/templates/game/show_seeker.html -->
+
+{% extends 'game/base.html' %}
+
+{% block content %}
+    <div class="background"></div>
+    <h1>{{ seeker.class_name }}</h1>
+    <ul>
+        <div class="heroes-container">
+            <div class="hero">
+                <div class="heroes-item"><img src="{{ seeker.image.url }}" alt="{{ seeker.class_name }}"></div>
+                <p class="heroes-name">{{ seeker.class_name }}</p>
+            </div>
+        </div>
+    </ul>
+    
+{% endblock %}

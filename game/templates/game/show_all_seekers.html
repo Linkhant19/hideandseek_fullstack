@@ -11,7 +11,11 @@
             {% for seeker in seekers %}
             <!-- show the image and name of the hero -->
             <div class="hero">
-                <div class="heroes-item"><img src="{{ seeker.image.url }}" alt="{{ seeker.hero_name }}"></div>
+                <div class="heroes-item">
+                    <a href="{% url 'show_seeker' seeker.pk %}">
+                        <img src="{{ seeker.image.url }}" alt="{{ seeker.hero_name }}">
+                    </a>
+                </div>
                 <p class="heroes-name">{{ seeker.class_name }}</p>
             </div>
             {% endfor %}

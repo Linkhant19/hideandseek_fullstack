@@ -1,0 +1,17 @@
+<!-- game/templates/game/show_hider.html -->
+
+{% extends 'game/base.html' %}
+
+{% block content %}
+    <div class="background"></div>
+    <h1>{{ hider.class_name }}</h1>
+    <ul>
+        <div class="heroes-container">
+            <div class="hero">
+                <div class="heroes-item"><img src="{{ hider.image.url }}" alt="{{ hider.class_name }}"></div>
+                <p class="heroes-name">{{ hider.class_name }}</p>
+            </div>
+        </div>
+    </ul>
+    
+{% endblock %}

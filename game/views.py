@@ -41,3 +41,19 @@ class ShowAllSeekers(ListView):
     model = Seeker
     template_name = 'game/show_all_seekers.html'
     context_object_name = 'seekers'
+
+class ShowHiderView(DetailView):
+    '''
+    class-based view called ShowHiderView to show a specific hider, inherited from DetailView.
+    '''
+    model = Hider
+    template_name = 'game/show_hider.html'
+    context_object_name = 'hider'
+
+class ShowSeekerView(DetailView):
+    '''
+    class-based view called ShowSeekerView to show a specific seeker, inherited from DetailView.
+    '''
+    model = Seeker
+    template_name = 'game/show_seeker.html'
+    context_object_name = 'seeker'

@@ -11,7 +11,11 @@
             {% for hider in hiders %}
                 <!-- show the image of the hero -->
                 <div class="hero">
-                    <div class="heroes-item"><img src="{{ hider.image.url }}" alt="{{ hider.class_name }}"></div>
+                    <div class="heroes-item">
+                        <a href="{% url 'show_hider' hider.pk %}">
+                            <img src="{{ hider.image.url }}" alt="{{ hider.class_name }}">
+                        </a> 
+                    </div>
                     <p class="heroes-name">{{ hider.class_name }}</p>
                 </div>
             {% endfor %}
