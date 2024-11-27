@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+from django.contrib.auth.models import User
 
 # my models
 class Profile(models.Model):
@@ -13,6 +15,9 @@ class Profile(models.Model):
     email = models.EmailField()
     games_played = models.IntegerField(default=0)
     games_won = models.IntegerField(default=0)
+
+    # associate each Profile with a User
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
         ''' string representation of profile '''

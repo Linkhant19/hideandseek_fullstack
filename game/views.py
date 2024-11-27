@@ -103,22 +103,96 @@ class GameView(View):
     template_name = 'game/game.html'
     context_object_name = 'game'
 
-    def get(self, request, *args, **kwargs):
-        context = self.get_context_data(**kwargs)
+    def get(self, request, pk, *args, **kwargs):
+        context = self.get_context_data(pk)
         return render(request, self.template_name, context)
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, pk):
         '''
         override get_context_data to add add_to_decks to context.
         make a list of all cards of this game's hider.
         make a list of all cards of this game's seeker.
         '''
         context = {}
-        context['games'] = Game.objects.all()
+        context['game'] = Game.objects.get(pk=pk)
         context['add_to_decks'] = AddToDeck.objects.all()
-        context['hider_cards'] = Card.objects.filter(addtodeck__hider_class__isnull=False)
-        context['seeker_cards'] = Card.objects.filter(addtodeck__seeker_class__isnull=False)
+        context['hider_cards'] = Card.objects.filter(addtodeck__hider_class=context['game'].hider_class)
+        context['seeker_cards'] = Card.objects.filter(addtodeck__seeker_class=context['game'].seeker_class)
         return context
+
+class CreateGameView(CreateView):
+    '''
+    class-based view called CreateGameView to create a game, inherited from CreateView.
+    Use the form from forms.py.
+    '''
+    form_class = CreateGameForm
+    template_name = 'game/create_game.html'
+    
+    def get_success_url(self):
+        return reverse('game:game', kwargs={'pk': self.object.pk})
+
+    def form_valid(self, form):
+        ''' this method exectues after form submission.'''
+        game = form.save(commit=False)
+        game.player = self.request.user.profile
+        game.save()
+        return redirect('game', pk=game.pk)
+
+
+class ShowProfileView(DetailView):
+    '''
+    class-based view called ShowProfileView to show a specific profile, inherited from DetailView.
+    '''
+    model = Profile
+    template_name = 'game/show_profile.html'
+    context_object_name = 'profile'
+
+    def get_success_url(self):
+        return reverse('game:show_profile', kwargs={'pk': self.object.pk})
+
+class CreateProfileView(CreateView):
+    '''
+    class-based view called CreateProfileView to create a profile, inherited from CreateView.
+    Use the form from forms.py.
+    '''
+    form_class = CreateProfileForm
+    template_name = 'game/create_profile.html'
+
+    def get_login_url(self):
+        '''return the URL to the login page'''
+        return reverse('login')
+
+    def get_success_url(self):
+        '''return URL to redirect to the show_profile page'''
+        return reverse('game:show_profile', kwargs={'pk': self.object.pk})
+
+    def get_context_data(self, **kwargs):
+        '''
+        provides context for the template
+        '''
+        context = super().get_context_data(**kwargs)
+        context['form2'] = UserCreationForm(self.request.POST)
+        return context
+
+    def form_valid(self, form):
+        ''' this method exectues after form submission.'''
+
+        form2 = UserCreationForm(self.request.POST)
+
+        if not form2.is_valid():
+            return super().form_invalid(form2)
+
+        # attach the user to the profile creation form
+        user = form2.save()
+        profile = form.instance
+        profile.user = user
+        profile.save()
+        login(self.request, user)
+        return redirect('show_profile', pk=profile.pk)
+
+    
+
+
 
 
 

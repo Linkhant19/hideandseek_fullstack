@@ -6,7 +6,6 @@
     <div class="background"></div>
     <h1>Game</h1>
     <ul>
-        {% for game in games %}
             <div>
                 <div class="one-hero-container">
                     <div><img src="{{ game.hider_class.image.url }}" alt="{{ game.hider_class.class_name }}"></div>
@@ -37,6 +36,5 @@
                     {% endfor %}
                 </div>
             </div>
-        {% endfor %}
     </ul>
 {% endblock %}
