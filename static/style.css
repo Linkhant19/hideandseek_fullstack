@@ -194,7 +194,24 @@ h1 {
 
 
 
+/* for game page */
+.game-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 70px;
+    z-index: 1;
+}
 
+.game-container img {
+    /* circle photo */
+    border-radius: 50%;
+    border: 3px solid black;
+    width: 200px;
+    height: 200px;
+}
 
   
 /* .background {

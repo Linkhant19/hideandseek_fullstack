@@ -1,40 +1,110 @@
-<!-- game/templates/game/game.html -->
-
 {% extends 'game/base.html' %}
 
 {% block content %}
     <div class="background"></div>
-    <h1>Game</h1>
     <ul>
-            <div>
-                <div class="one-hero-container">
-                    <div><img src="{{ game.hider_class.image.url }}" alt="{{ game.hider_class.class_name }}"></div>
-                    <div>
-                        <p>{{ game.hider_class.description }}</p>
-                    </div>
-                </div>
-                <br>
-                <h1>Hider's Cards</h1>
-                <div class="card-list-container">
-                    {% for card in hider_cards %}
-                        <div class="card-list-item"><img src="{{ card.image.url }}" alt="{{ card.card_name }}"></div>
-                    {% endfor %}
-                </div>
-                <br>
-                <h1>Seeker</h1>
-                <div class="one-hero-container">
-                    <div><img src="{{ game.seeker_class.image.url }}" alt="{{ game.seeker_class.class_name }}"></div>
-                    <div>
-                        <p>{{ game.seeker_class.description }}</p>
-                    </div>
-                </div>
-                <br>
-                <h1>Seeker's Cards</h1>
-                <div class="card-list-container">
-                    {% for card in seeker_cards %}
-                        <div class="card-list-item"><img src="{{ card.image.url }}" alt="{{ card.card_name }}"></div>
-                    {% endfor %}
-                </div>
+        <div>
+            <!-- Game Status -->
+            <h2 id="game-status">Current Turn: 0</h2>
+
+            <div class="game-container">
+                <div><img src="{{ game.hider_class.image.url }}" alt="{{ game.hider_class.class_name }}"></div>
+                <div>{{ game.hider_class.class_name }}</div>
+                <div>Vs.</div>
+                <div>{{ game.seeker_class.class_name }}</div>
+                <div><img src="{{ game.seeker_class.image.url }}" alt="{{ game.seeker_class.class_name }}"></div>
             </div>
+
+            <br>
+            <button id="hide-btn">Hide</button>
+            <button id="play-btn">Play</button>
+            <br>
+
+
+            <!-- not sure if I should show these. They flood the interface -->
+            <div id="hider-card-list" class="card-list-container" style="display: none;">
+                {% for card in hider_cards %}
+                    <div class="card-list-item">
+                        <img src="{{ card.image.url }}" alt="{{ card.card_name }}" data-card-type="{{ card.card_type }}" data-card-id="{{ card.id }}">
+                    </div>
+                {% endfor %}
+            </div>
+            
+            <div id="seeker-card-list" class="card-list-container" style="display: none;">
+                {% for card in seeker_cards %}
+                    <div class="card-list-item">
+                        <img src="{{ card.image.url }}" alt="{{ card.card_name }}" data-card-type="{{ card.card_type }}" data-card-id="{{ card.id }}">
+                    </div>
+                {% endfor %}
+            </div>
+            
+
+        </div>
     </ul>
+
+    <!-- Inline JavaScript -->
+    <script>
+        // Initialize Game State
+        let gameState = {
+            turn: 0,
+            isHiding: false,
+        };
+
+        // My play Button Logic
+        document.getElementById("play-btn").addEventListener("click", () => {
+            const hiderCards = document.querySelectorAll("#hider-card-list .card-list-item img"); // we will get the hider's cards from html with selector
+            const randomCard = hiderCards[Math.floor(Math.random() * hiderCards.length)];
+            const hiderAction = `Hider played ${randomCard.getAttribute("alt")}`;
+            gameState.isHiding = false; // Not hiding if Hider plays a card
+            handleTurn(hiderAction);
+        });
+
+        // My hide Button Logic
+        document.getElementById("hide-btn").addEventListener("click", () => {
+            gameState.isHiding = true;
+            handleTurn("Hider chose to hide.");
+        });
+
+        // Seeker Plays Random Card
+        function seekerTurn() {
+            /* 
+            get all seeker cards and return a random card's name and type. 
+            */
+            const seekerCards = document.querySelectorAll("#seeker-card-list .card-list-item img");
+            console.log(seekerCards);
+            const randomCard = seekerCards[Math.floor(Math.random() * seekerCards.length)];
+            return {
+                name: randomCard.getAttribute("alt"),
+                type: randomCard.getAttribute("data-card-type"),
+            };
+        }
+
+
+        // Handle Each Turn
+        function handleTurn(hiderAction) {
+            /*
+            handle each turn's actions.
+            */
+            gameState.turn++;
+
+            // Seeker's Turn
+            const seekerCard = seekerTurn();
+            const seekerAction = `Seeker played ${seekerCard.name}`;
+
+            // Determine Outcome
+            let result = "continue";
+            if (!gameState.isHiding && seekerCard.name === "Attack!") {
+                result = "lose";
+                document.getElementById("game-status").innerText = "Hider lost! Game over.";
+                alert("Game Over: Hider Lost!");
+                return;
+            }
+
+            // Update Status and Log Actions
+            document.getElementById("game-status").innerText = `Current Turn: ${gameState.turn}`;
+            console.log(`Turn ${gameState.turn}:`);
+            console.log(hiderAction);
+            console.log(seekerAction);
+        }
+    </script>
 {% endblock %}
