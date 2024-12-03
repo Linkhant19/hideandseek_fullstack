@@ -198,6 +198,13 @@ class GameOverView(DetailView):
     template_name = 'game/game_over.html'
     context_object_name = 'game'
 
+    def get(self, request, *args, **kwargs):
+        '''
+        override get to update the profile with the number of games played and games won.
+        '''
+        self.update_profile()
+        return super().get(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         '''
         override get_context_data and also allow result from game.html to be passed to game_over.html
@@ -209,6 +216,22 @@ class GameOverView(DetailView):
         elif result == 'lose':
             context['result'] = 'You lost!'
         return context
+
+    def update_profile(self):
+        '''
+        update the profile with the number of games played and games won.
+        '''
+        try:
+            profile = self.request.user.profile
+
+            # if result is win, update games won
+            if self.request.GET.get('result') == 'win':
+                profile.games_won += 1
+
+            profile.games_played += 1
+            profile.save()
+        except Exception as e:
+            print(f"Error updating profile: {e}")
 
 
     
