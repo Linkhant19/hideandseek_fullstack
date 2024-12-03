@@ -20,6 +20,7 @@
             <button id="play-btn">Play</button>
             <!-- this is the continue button and will be hidden until the game is over -->
             <!-- on click, it will redirect to the game_over page -->
+            <!-- redirect with the result as a parameter -->
             <a href="{% url 'game_over' game.pk %}"><button id="continue-btn" style="display: none;">Continue</button></a>
             <br>
 
@@ -128,8 +129,9 @@
                 // show the continue button
                 document.getElementById("continue-btn").style.display = "block";
 
-                // redirect to game_over page with the result as a parameter
-                window.location.href = "{% url 'game_over' game.pk %}?result=" + result;
+                // update the href of the continue button
+                const gameOverUrl = `{% url 'game_over' game.pk %}`;
+                document.getElementById("continue-btn").parentNode.href = `${gameOverUrl}?result=lose`;
                 return;
             }
 
@@ -140,7 +142,7 @@
             
 
             // If turn reaches 10, game is over and Hider wins
-            if (gameState.turn === 10) {
+            if (gameState.turn === 1) {
                 result = "win";
                 document.getElementById("game-status").innerText = "Hider won! Game over.";
                 // hide the hide and play buttons
@@ -149,8 +151,12 @@
                 // show the continue button
                 document.getElementById("continue-btn").style.display = "block";
 
-                // redirect to game_over page with the result as a parameter
-                window.location.href = "{% url 'game_over' game.pk %}?result=" + result;
+                // redirect to game_over view with result
+                // window.location.href = `/game_over/${game.pk}?result=win`;
+
+                // update the href of the continue button
+                const gameOverUrl = `{% url 'game_over' game.pk %}`;
+                document.getElementById("continue-btn").parentNode.href = `${gameOverUrl}?result=win`;
                 return;
             }
 
