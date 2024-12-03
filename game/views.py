@@ -190,6 +190,28 @@ class CreateProfileView(CreateView):
         login(self.request, user)
         return redirect('show_profile', pk=profile.pk)
 
+def game_over(request, game_pk):
+    '''
+    Handle game completion. Updates database with results.
+    '''
+    if request.method == 'POST':
+        game = Game.objects.get(pk=game_pk)
+        winner = request.POST.get("winner")
+        game.status = "completed"
+        game.save()
+
+        if winner == "hider":
+            profile = game.player
+            profile.games_won += 1
+            profile.games_played += 1
+            profile.save()
+        else:
+            game.player.games_played += 1
+            game.player.save()
+
+        return JsonResponse({"message": "Game updated successfully."})
+    return JsonResponse({"error": "Invalid request."}, status=400)
+
     
 
 

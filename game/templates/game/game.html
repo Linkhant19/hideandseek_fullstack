@@ -18,7 +18,14 @@
             <br>
             <button id="hide-btn">Hide</button>
             <button id="play-btn">Play</button>
+            <!-- this is the continue button and will be hidden until the game is over -->
+            <button id="continue-btn" style="display: none;">Continue</button>
             <br>
+
+            <div>
+                <p id="hider-plays">{{ game.hider_class.class_name }}</p>
+                <p id="seeker-plays">{{ game.seeker_class.class_name }}</p>
+            </div>
 
 
             <!-- not sure if I should show these. They flood the interface -->
@@ -48,21 +55,33 @@
         let gameState = {
             turn: 0,
             isHiding: false,
+            // variable to keep track of how many consective turns hider has hidden
+            hiddenTurns: 0
         };
 
         // My play Button Logic
         document.getElementById("play-btn").addEventListener("click", () => {
             const hiderCards = document.querySelectorAll("#hider-card-list .card-list-item img"); // we will get the hider's cards from html with selector
             const randomCard = hiderCards[Math.floor(Math.random() * hiderCards.length)];
-            const hiderAction = `Hider played ${randomCard.getAttribute("alt")}`;
+            const hiderAction = `Hider played ${randomCard.getAttribute("alt")}.`;
             gameState.isHiding = false; // Not hiding if Hider plays a card
+            // reset the hiddenTurns variable
+            gameState.hiddenTurns = 0;
             handleTurn(hiderAction);
         });
 
         // My hide Button Logic
         document.getElementById("hide-btn").addEventListener("click", () => {
-            gameState.isHiding = true;
-            handleTurn("Hider chose to hide.");
+            // can only hide if Hider has not hidden for 2 consecutive turns
+            if (gameState.hiddenTurns < 2) {
+                gameState.hiddenTurns++;
+                gameState.isHiding = true;
+                handleTurn("Hider chose to hide.");
+            } else {
+                document.getElementById('hider-plays').innerText = "Hider cannot hide anymore.";
+                document.getElementById('seeker-plays').innerText = "Please choose another action.";
+                return;
+            }  
         });
 
         // Seeker Plays Random Card
@@ -85,26 +104,54 @@
             /*
             handle each turn's actions.
             */
-            gameState.turn++;
+            
 
             // Seeker's Turn
             const seekerCard = seekerTurn();
-            const seekerAction = `Seeker played ${seekerCard.name}`;
+            const seekerAction = `Seeker played ${seekerCard.name}.`;
 
             // Determine Outcome
             let result = "continue";
+
+            // Update Status, Hider and Seeker actions, and Log Actions
+            document.getElementById("hider-plays").innerText = hiderAction;
+            document.getElementById("seeker-plays").innerText = seekerAction;
+
+            // I need this to lead to a Game Over page.
             if (!gameState.isHiding && seekerCard.name === "Attack!") {
                 result = "lose";
                 document.getElementById("game-status").innerText = "Hider lost! Game over.";
-                alert("Game Over: Hider Lost!");
+                // hide the hide and play buttons
+                document.getElementById("hide-btn").style.display = "none";
+                document.getElementById("play-btn").style.display = "none";
+                // show the continue button
+                document.getElementById("continue-btn").style.display = "block";
                 return;
             }
 
-            // Update Status and Log Actions
+            // Update Game State
+            gameState.turn++;
             document.getElementById("game-status").innerText = `Current Turn: ${gameState.turn}`;
+
+            
+
+            // If turn reaches 10, game is over and Hider wins
+            if (gameState.turn === 10) {
+                result = "win";
+                document.getElementById("game-status").innerText = "Hider won! Game over.";
+                // hide the hide and play buttons
+                document.getElementById("hide-btn").style.display = "none";
+                document.getElementById("play-btn").style.display = "none";
+                // show the continue button
+                document.getElementById("continue-btn").style.display = "block";
+                return;
+            }
+
+            // Just for my debugging purposes
             console.log(`Turn ${gameState.turn}:`);
             console.log(hiderAction);
             console.log(seekerAction);
         }
+
     </script>
 {% endblock %}
