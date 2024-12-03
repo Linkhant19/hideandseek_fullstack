@@ -18,6 +18,14 @@ import random
 
 # creating my views
 
+class MainView(ListView):
+    '''
+    class-based view to show main page, inherited from ListView.
+    '''
+    model = Game
+    template_name = 'game/main.html'
+    context_object_name = 'games'
+
 class ShowAllCards(ListView):
     '''
     class-based view to show all cards, inherited from ListView.
@@ -120,13 +128,17 @@ class GameView(View):
         context['seeker_cards'] = Card.objects.filter(addtodeck__seeker_class=context['game'].seeker_class)
         return context
 
-class CreateGameView(CreateView):
+class CreateGameView(LoginRequiredMixin, CreateView):
     '''
     class-based view called CreateGameView to create a game, inherited from CreateView.
     Use the form from forms.py.
     '''
     form_class = CreateGameForm
     template_name = 'game/create_game.html'
+
+    def get_login_url(self):
+        '''return the URL to the login page'''
+        return reverse('login')
     
     def get_success_url(self):
         return reverse('game:game', kwargs={'pk': self.object.pk})

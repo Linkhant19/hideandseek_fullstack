@@ -8,6 +8,42 @@ body {
     /* text-align: center; */
 }
 
+/* start of main page css */
+h3 {
+    text-align: center;
+    font-size: 200px;
+}
+
+.hide-title {
+    position: absolute;
+    z-index: 1;
+    margin-top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.seek-title {
+    position: absolute;
+    z-index: 2;
+    margin-top: 180px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.and-title {
+    position: absolute;
+    z-index: 3;
+    margin-top: 105px;
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* end of main page css */
+
+
+/* start of header and nav bar css */
 header {
     display: flex;
     align-items: center;
@@ -31,12 +67,17 @@ nav {
 
 nav * {
     margin: 20px;
+    margin-top: 0px;
+}
+
+nav img {
     margin-top: 10px;
 }
 
 .profile-header {
     margin-left: 485px;
 }
+/* end of header and nav bar css */
 
 h1 {
     margin-top: 50px;
@@ -139,8 +180,6 @@ h1 {
     border: 7px inset black;
 }
 
-
-
 /* for search bar */
 .search-container {
     display: flex;
@@ -236,15 +275,6 @@ h1 {
     height: auto;
     animation: scaleIn 1s ease-in-out;
 }
-
-/* @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-} */
 
 @keyframes scaleIn {
 	0% {

@@ -1,0 +1,26 @@
+<!-- game/templates/game/login.html -->
+
+{% extends 'game/base.html' %}
+
+{% block content %}
+<h2>Login</h2>
+<form method="POST" action="{% url 'login' %}">
+    {% csrf_token %}
+    {{ form }}
+
+    <!-- only do this if we don't have next attrible already -->
+    {% if not next %}
+        <input type="hidden" name="next" value="{% url 'show_profile' self.request.user.profile.pk %}">
+    {% else %}
+        <input type="hidden" name="next" value="{{ next }}">
+    {% endif %}
+        <input type="submit" value="Login">
+
+</form>
+
+<!-- or create a new profile -->
+
+<form action="{% url 'create_profile' %}">
+    <input type="submit" value="Create Profile">
+</form>
+{% endblock %}

@@ -10,32 +10,35 @@
     <body>
         <header> 
             <nav>
-                <img src="{% static 'images/logo.png' %}" alt="logo">
-                <ul>
-                    <li><a href="{% url 'show_all_cards' %}">All Cards</a></li>
-                    <li><a href="{% url 'show_all_hiders' %}">Hiders</a></li>
-                    <li><a href="{% url 'show_all_seekers' %}">Seekers</a></li>
-                    {% if user.is_authenticated %}
-                        <li><a href="{% url 'create_game' %}">Play Game</a></li>
-                    {% else %}
-                        <!-- just for alignment -->
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    {% endif %}
-                </ul>
+                <a href="{% url 'main' %}"><img src="{% static 'images/logo.png' %}" alt="logo"></a>   
+                <li><a href="{% url 'show_all_cards' %}">All Cards</a></li>
+                <li><a href="{% url 'show_all_hiders' %}">Hiders</a></li>
+                <li><a href="{% url 'show_all_seekers' %}">Seekers</a></li>
+                <li><a href="{% url 'create_game' %}">Play Game</a></li>
+                {% if user.is_authenticated %}
+                    
+                    <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
+                        {% csrf_token %}
+                    </form>
+                    <li><a href="#" onclick="document.getElementById('logout-form').submit()">Log Out</a></li>
+                {% else %}
+                    <!-- just for alignment -->
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                {% endif %}
+
                 <!-- show profile picture if logged in. I will handle this later. -->
                 {% if user.is_authenticated %}
                     <!-- redirects to this specific user's profile -->
                     <a class="profile-header" href="{% url 'show_profile' user.profile.pk %}">Profile</a>
                 {% else %}
-                    <a class="profile-header" href="{% url 'create_profile' %}">Login</a>
+                    <a class="profile-header" href="{% url 'login' %}">Login</a>
                 {% endif %}
             </nav>
         </header>
         
-        <hr>
         {% block content %}
         {% endblock %}
     </body>
