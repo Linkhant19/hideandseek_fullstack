@@ -16,4 +16,5 @@ urlpatterns = [
     path(r'game/<int:pk>', views.GameView.as_view(), name='game'), # page for showing a specific game
     path(r'profile/<int:pk>', views.ShowProfileView.as_view(), name='show_profile'), # page for showing a specific profile
     path(r'create_profile/', views.CreateProfileView.as_view(), name='create_profile'), # page for creating a profile
+    path(r'game_over/<int:pk>', views.GameOverView.as_view(), name='game_over'), # page for showing a specific game over
 ]

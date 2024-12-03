@@ -190,27 +190,30 @@ class CreateProfileView(CreateView):
         login(self.request, user)
         return redirect('show_profile', pk=profile.pk)
 
-def game_over(request, game_pk):
+class GameOverView(DetailView):
     '''
-    Handle game completion. Updates database with results.
+    class-based view called GameOverView to show a specific game, inherited from DetailView.
     '''
-    if request.method == 'POST':
-        game = Game.objects.get(pk=game_pk)
-        winner = request.POST.get("winner")
-        game.status = "completed"
-        game.save()
+    model = Game
+    template_name = 'game/game_over.html'
+    context_object_name = 'game'
 
-        if winner == "hider":
-            profile = game.player
-            profile.games_won += 1
-            profile.games_played += 1
-            profile.save()
-        else:
-            game.player.games_played += 1
-            game.player.save()
+    def get_context_data(self, **kwargs):
+        '''
+        override get_context_data and also allow result from game.html to be passed to game_over.html
+        '''
+        context = super().get_context_data(**kwargs)
+        result = self.request.GET.get('result')
+        if result == 'win':
+            context['result'] = 'You won!'
+        elif result == 'lose':
+            context['result'] = 'You lost!'
+        return context
 
-        return JsonResponse({"message": "Game updated successfully."})
-    return JsonResponse({"error": "Invalid request."}, status=400)
+
+    
+
+
 
     
 

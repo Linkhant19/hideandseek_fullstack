@@ -1,0 +1,24 @@
+<!-- game/templates/game/game_over.html -->
+
+{% extends 'game/base.html' %}
+
+{% block content %}
+    <div class="background"></div>
+    <h1>GAME OVER</h1>
+
+    <!-- display the result -->
+    <ul>
+        <li>Result: {{ result }}</li>
+    </ul>
+    
+    <!-- play again button -->
+    <form action="{% url 'create_game' %}">
+        <input type="submit" value="Play Again">
+    </form>
+
+    <!-- if our users want to check their profile. -->
+    <form action="{% url 'show_profile' user.profile.pk %}">
+        <input type="submit" value="Check Profile">
+    </form>
+
+{% endblock %}

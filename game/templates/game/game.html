@@ -19,7 +19,8 @@
             <button id="hide-btn">Hide</button>
             <button id="play-btn">Play</button>
             <!-- this is the continue button and will be hidden until the game is over -->
-            <button id="continue-btn" style="display: none;">Continue</button>
+            <!-- on click, it will redirect to the game_over page -->
+            <a href="{% url 'game_over' game.pk %}"><button id="continue-btn" style="display: none;">Continue</button></a>
             <br>
 
             <div>
@@ -126,6 +127,9 @@
                 document.getElementById("play-btn").style.display = "none";
                 // show the continue button
                 document.getElementById("continue-btn").style.display = "block";
+
+                // redirect to game_over page with the result as a parameter
+                window.location.href = "{% url 'game_over' game.pk %}?result=" + result;
                 return;
             }
 
@@ -144,6 +148,9 @@
                 document.getElementById("play-btn").style.display = "none";
                 // show the continue button
                 document.getElementById("continue-btn").style.display = "block";
+
+                // redirect to game_over page with the result as a parameter
+                window.location.href = "{% url 'game_over' game.pk %}?result=" + result;
                 return;
             }
 
