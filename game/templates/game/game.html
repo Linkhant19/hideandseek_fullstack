@@ -1,55 +1,68 @@
 {% extends 'game/base.html' %}
 
 {% block content %}
-    <div class="background"></div>
-    <ul>
-        <div>
-            <!-- Game Status -->
-            <h2 id="game-status">Current Turn: 0</h2>
+    <div>
+        <!-- Game Status -->
+        <h2 class="game-status" id="game-status">Current Turn: 0</h2>
 
-            <div class="game-container">
-                <div><img src="{{ game.hider_class.image.url }}" alt="{{ game.hider_class.class_name }}"></div>
-                <div>{{ game.hider_class.class_name }}</div>
-                <div>Vs.</div>
-                <div>{{ game.seeker_class.class_name }}</div>
-                <div><img src="{{ game.seeker_class.image.url }}" alt="{{ game.seeker_class.class_name }}"></div>
-            </div>
+        <div class="hider-buttons">
+            <button id="hide-btn">HIDE</button>
 
-            <br>
-            <button id="hide-btn">Hide</button>
-            <button id="play-btn">Play</button>
-            <!-- this is the continue button and will be hidden until the game is over -->
-            <!-- on click, it will redirect to the game_over page -->
-            <!-- redirect with the result as a parameter -->
-            <a href="{% url 'game_over' game.pk %}"><button id="continue-btn" style="display: none;">Continue</button></a>
-            <br>
-
-            <div>
-                <p id="hider-plays">{{ game.hider_class.class_name }}</p>
-                <p id="seeker-plays">{{ game.seeker_class.class_name }}</p>
-            </div>
-
-
-            <!-- not sure if I should show these. They flood the interface -->
-            <div id="hider-card-list" class="card-list-container" style="display: none;">
-                {% for card in hider_cards %}
-                    <div class="card-list-item">
-                        <img src="{{ card.image.url }}" alt="{{ card.card_name }}" data-card-type="{{ card.card_type }}" data-card-id="{{ card.id }}">
-                    </div>
-                {% endfor %}
-            </div>
-            
-            <div id="seeker-card-list" class="card-list-container" style="display: none;">
-                {% for card in seeker_cards %}
-                    <div class="card-list-item">
-                        <img src="{{ card.image.url }}" alt="{{ card.card_name }}" data-card-type="{{ card.card_type }}" data-card-id="{{ card.id }}">
-                    </div>
-                {% endfor %}
-            </div>
-            
-
+            <button id="play-btn">PLAY</button>    
+        
         </div>
-    </ul>
+
+        <div class="hider-buttons">
+            <a href="{% url 'game_over' game.pk %}"><button id="continue-btn" style="display: none;">Continue</button></a>
+        </div>
+
+        <div class="game-container">
+            <div class="hider-container">
+                <div class="hider-class-name">
+                    {{ game.hider_class.class_name }}
+                </div>
+                <div class="hider-image">
+                    <img src="{{ game.hider_class.image.url }}" alt="{{ game.hider_class.class_name }}">
+                </div>
+
+                <div class="hider-plays">
+                    <p id="hider-plays">Hider</p>
+                    <div id="hider-card-played" class="card-played"></div>
+                </div>
+            </div>
+            <div class="seeker-container">
+                <div class="seeker-class-name">
+                    {{ game.seeker_class.class_name }}
+                </div>
+                <div class="seeker-image">
+                    <img src="{{ game.seeker_class.image.url }}" alt="{{ game.seeker_class.class_name }}">
+                </div>
+                <div class="seeker-plays">
+                    <p id="seeker-plays">Seeker</p>
+                    <div id="seeker-card-played" class="card-played"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- not sure if I should show these. They flood the interface -->
+        <div id="hider-card-list" class="card-list-container" style="display: none;">
+            {% for card in hider_cards %}
+                <div class="card-list-item">
+                    <img src="{{ card.image.url }}" alt="{{ card.card_name }}" data-card-type="{{ card.card_type }}" data-card-id="{{ card.id }}">
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div id="seeker-card-list" class="card-list-container" style="display: none;">
+            {% for card in seeker_cards %}
+                <div class="card-list-item">
+                    <img src="{{ card.image.url }}" alt="{{ card.card_name }}" data-card-type="{{ card.card_type }}" data-card-id="{{ card.id }}">
+                </div>
+            {% endfor %}
+        </div>
+        
+
+    </div>
 
     <!-- Inline JavaScript -->
     <script>
@@ -63,9 +76,22 @@
 
         // My play Button Logic
         document.getElementById("play-btn").addEventListener("click", () => {
+            // Update Hider Card Played to none
+            const hiderCardPlayedElement = document.getElementById("hider-card-played");
+            hiderCardPlayedElement.innerHTML = "";
+
+            // Update the hider-image's border color to black
+            const hiderImage = document.querySelector(".hider-image img");
+            hiderImage.style.borderColor = "black";
+
             const hiderCards = document.querySelectorAll("#hider-card-list .card-list-item img"); // we will get the hider's cards from html with selector
             const randomCard = hiderCards[Math.floor(Math.random() * hiderCards.length)];
             const hiderAction = `Hider played ${randomCard.getAttribute("alt")}.`;
+
+            // Update Hider Card Played
+            hiderCardPlayedElement.innerHTML = `<img src="${randomCard.src}" alt="${randomCard.getAttribute("alt")}" />`;
+
+
             gameState.isHiding = false; // Not hiding if Hider plays a card
             // reset the hiddenTurns variable
             gameState.hiddenTurns = 0;
@@ -74,6 +100,11 @@
 
         // My hide Button Logic
         document.getElementById("hide-btn").addEventListener("click", () => {
+            // Update Hider Card Played to none
+            const hiderCardPlayedElement = document.getElementById("hider-card-played");
+            hiderCardPlayedElement.innerHTML = "";
+
+
             // can only hide if Hider has not hidden for 2 consecutive turns
             if (gameState.hiddenTurns < 2) {
                 gameState.hiddenTurns++;
@@ -84,6 +115,11 @@
                 document.getElementById('seeker-plays').innerText = "Please choose another action.";
                 return;
             }  
+
+            // update the hider-image's border color to red
+            const hiderImage = document.querySelector(".hider-image img");
+            hiderImage.style.borderColor = "red";
+
         });
 
         // Seeker Plays Random Card
@@ -91,12 +127,18 @@
             /* 
             get all seeker cards and return a random card's name and type. 
             */
+
+            // Update Seeker Card Played to none
+            const seekerCardPlayedElement = document.getElementById("seeker-card-played");
+            seekerCardPlayedElement.innerHTML = "";
+
             const seekerCards = document.querySelectorAll("#seeker-card-list .card-list-item img");
             console.log(seekerCards);
             const randomCard = seekerCards[Math.floor(Math.random() * seekerCards.length)];
             return {
                 name: randomCard.getAttribute("alt"),
                 type: randomCard.getAttribute("data-card-type"),
+                image: randomCard.src,
             };
         }
 
@@ -106,11 +148,14 @@
             /*
             handle each turn's actions.
             */
-            
 
             // Seeker's Turn
             const seekerCard = seekerTurn();
             const seekerAction = `Seeker played ${seekerCard.name}.`;
+
+            // Update Seeker Card Played
+            const seekerCardPlayedElement = document.getElementById("seeker-card-played");
+            seekerCardPlayedElement.innerHTML = `<img src="${seekerCard.image}" alt="${seekerCard.name}" />`;
 
             // Determine Outcome
             let result = "continue";
@@ -122,7 +167,6 @@
             // I need this to lead to a Game Over page.
             if (!gameState.isHiding && seekerCard.name === "Attack!") {
                 result = "lose";
-                document.getElementById("game-status").innerText = "Hider lost! Game over.";
                 // hide the hide and play buttons
                 document.getElementById("hide-btn").style.display = "none";
                 document.getElementById("play-btn").style.display = "none";
@@ -132,6 +176,15 @@
                 // update the href of the continue button
                 const gameOverUrl = `{% url 'game_over' game.pk %}`;
                 document.getElementById("continue-btn").parentNode.href = `${gameOverUrl}?result=lose`;
+                setTimeout(() => {
+                    const gameStatusElement = document.getElementById("game-status");
+                    gameStatusElement.style.opacity = "0";
+                    setTimeout(() => {
+                        gameStatusElement.innerText = "Hider lost! Game over.";
+                        gameStatusElement.style.opacity = "1";
+                    }, 500);
+                    
+                }, 1000);
                 return;
             }
 
@@ -142,7 +195,7 @@
             
 
             // If turn reaches 10, game is over and Hider wins
-            if (gameState.turn === 1) {
+            if (gameState.turn === 10) {
                 result = "win";
                 document.getElementById("game-status").innerText = "Hider won! Game over.";
                 // hide the hide and play buttons

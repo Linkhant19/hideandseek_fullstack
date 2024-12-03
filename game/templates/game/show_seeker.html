@@ -5,26 +5,23 @@
 {% block content %}
     <div class="background"></div>
     <h1>{{ seeker.class_name }}</h1>
-    <ul>
-        <div>
-            <div class="one-hero-container">
-                <div><img src="{{ seeker.image.url }}" alt="{{ seeker.class_name }}"></div>
-                <div>
-                    <p>{{ seeker.description }}</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta saepe quod consequuntur id eveniet iusto temporibus totam ullam, error facilis accusantium eaque accusamus quis. Tenetur animi aspernatur nesciunt dolorum aperiam?</p>
+    <div>
+        <div class="one-hero-container">
+            <div><img src="{{ seeker.image.url }}" alt="{{ seeker.class_name }}"></div>
+            <div>
+                <p>{{ seeker.description }}</p>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta saepe quod consequuntur id eveniet iusto temporibus totam ullam, error facilis accusantium eaque accusamus quis. Tenetur animi aspernatur nesciunt dolorum aperiam?</p>
 
-                </div>
             </div>
         </div>
-        <br>
-        <!-- show all cards of the seeker -->
-        <h1>Cards</h1>
-        <div class="card-list-container">
-            {% for hand in add_to_decks %}
-                <div class="card-list-item"><img src="{{ hand.card.image.url }}" alt="{{ card.card_name }}"></div>
-            {% endfor %}
-        </div>
-
-    </ul>
+    </div>
+    <br>
+    <!-- show all cards of the seeker -->
+    <h1>Cards</h1>
+    <div class="card-list-container">
+        {% for hand in add_to_decks %}
+            <div class="card-list-item"><img src="{{ hand.card.image.url }}" alt="{{ card.card_name }}"></div>
+        {% endfor %}
+    </div>
     
 {% endblock %}

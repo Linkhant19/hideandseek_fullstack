@@ -5,21 +5,19 @@
 {% block content %}
     <div class="background"></div>
     <h1>HIDERS</h1>
-    <ul>
-        <!-- ultimately, I will change the view design of the heroes to be different from cards. -->
-        <div class="heroes-container">
-            {% for hider in hiders %}
-                <!-- show the image of the hero -->
-                <div class="hero">
-                    <div class="heroes-item">
-                        <a href="{% url 'show_hider' hider.pk %}">
-                            <img src="{{ hider.image.url }}" alt="{{ hider.class_name }}">
-                        </a> 
-                    </div>
-                    <p class="heroes-name">{{ hider.class_name }}</p>
+    <!-- ultimately, I will change the view design of the heroes to be different from cards. -->
+    <div class="heroes-container">
+        {% for hider in hiders %}
+            <!-- show the image of the hero -->
+            <div class="hero">
+                <div class="heroes-item">
+                    <a href="{% url 'show_hider' hider.pk %}">
+                        <img src="{{ hider.image.url }}" alt="{{ hider.class_name }}">
+                    </a> 
                 </div>
-            {% endfor %}
-        </div>
-    </ul>
+                <p class="heroes-name">{{ hider.class_name }}</p>
+            </div>
+        {% endfor %}
+    </div>
     
 {% endblock %}
