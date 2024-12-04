@@ -13,10 +13,15 @@ body {
 
 
 /* start of main page css */
-h3 {
+/* h3 {
     text-align: center;
     font-size: 200px;
     color: #f37d59;
+    text-shadow: 
+        2px 2px 0px black,   
+        -2px 2px 0px black,  
+        2px -2px 0px black, 
+        -2px -2px 0px black; 
 }
 
 .hide-title {
@@ -64,9 +69,10 @@ h3 {
     transform: translateX(-50%);
 }
 
-/* .and-title {
-    display: none;
-} */
+.and-title {
+    text-shadow: none;
+    transition: 1.5s ease;
+}
 
 .small-title {
     position: absolute;
@@ -91,12 +97,120 @@ h3 {
 }
 
 @keyframes drowns {
-    /* opposite of lifts */
     0% {
         transform: translateX(-50%) translateY(0px);
     }
     100% {
         transform: translateX(-50%) translateY(20px);
+    }
+}
+
+@keyframes flash {
+    0% {
+      background-color: #fff;
+    }
+    50% {
+      background-color: #ff69b4;
+    }
+    100% {
+      background-color: #fff;
+    }
+} */
+
+h3 {
+    text-align: center;
+    font-size: 250px;
+    color: #f37d59;
+    text-shadow: 
+        2px 2px 0px black,   
+        -2px 2px 0px black,  
+        2px -2px 0px black, 
+        -2px -2px 0px black; 
+}
+
+.hide-title {
+    position: absolute;
+    z-index: 1;
+    margin-top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: transform 0.5s ease;
+    cursor: pointer;
+}
+
+.hide-title:hover {
+    animation: lifts 1s ease-out forwards;
+}
+
+.hide-title:hover ~ .seek-title {
+    animation: drowns 1s ease-out forwards;
+}
+
+.hide-title:hover ~ .small-title {
+    opacity: 1;
+    transition: opacity 3s ease;
+}
+
+.seek-title {
+    position: absolute;
+    z-index: 2;
+    margin-top: 155px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: 3s ease;
+    cursor: pointer;
+}
+
+.seek-title:hover {
+    opacity: 0;
+}
+
+.and-title {
+    position: absolute;
+    z-index: 3;
+    margin-top: 55px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 260px;
+    color: #faca78;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.and-title {
+    text-shadow: none;
+    transition: 1.5s ease;
+    
+}
+
+.small-title {
+    position: absolute;
+    z-index: 3;
+    margin-top: 190px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+    color: #764838;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0s ease;
+}
+
+@keyframes lifts {
+    0% {
+        transform: translateX(-50%) translateY(0px);
+    }
+    100% {
+        transform: translateX(-50%) translateY(-30px);
+    }
+}
+
+@keyframes drowns {
+    0% {
+        transform: translateX(-50%) translateY(0px);
+    }
+    100% {
+        transform: translateX(-50%) translateY(30px);
     }
 }
 
@@ -466,9 +580,10 @@ h1 {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    padding: 20px;
-    gap: 200px;
+    justify-content: space-between;
+    /* gap: 200px; */
+    padding-left: 150px;
+    padding-right: 150px;
     
 }
 
@@ -528,13 +643,6 @@ h1 {
     padding: 20px;
     
 }
-
-/* .table-results {
-    font-family: "DotGothic16", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    letter-spacing: .2em;
-} */
 
 .table-fields {
     font-family: "DotGothic16", sans-serif;
