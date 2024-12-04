@@ -16,6 +16,10 @@ from django.contrib.auth import login
 from django.http import JsonResponse
 import random
 
+import operator
+import plotly
+import plotly.graph_objects as go
+
 # creating my views
 
 class MainView(ListView):
@@ -112,6 +116,9 @@ class GameView(View):
     context_object_name = 'game'
 
     def get(self, request, pk, *args, **kwargs):
+        '''
+        override get method to add add_to_decks to context.
+        '''
         context = self.get_context_data(pk)
         return render(request, self.template_name, context)
 
@@ -141,6 +148,7 @@ class CreateGameView(LoginRequiredMixin, CreateView):
         return reverse('login')
     
     def get_success_url(self):
+        '''return URL to redirect to the game page'''
         return reverse('game:game', kwargs={'pk': self.object.pk})
 
     def form_valid(self, form):
@@ -160,7 +168,66 @@ class ShowProfileView(DetailView):
     context_object_name = 'profile'
 
     def get_success_url(self):
+        '''return URL to redirect to the show_profile page'''
         return reverse('game:show_profile', kwargs={'pk': self.object.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # calculate games lost
+        context['games_lost'] = self.object.games_played - self.object.games_won
+        
+        # Get the current profile player
+        profile_player = self.object
+        
+        # Query the Game model to get the hider and seeker classes played by the profile player
+        games = Game.objects.filter(player=profile_player)
+        
+        # Create lists to store the hider and seeker class names and counts
+        hider_x = []
+        hider_y = []
+        seeker_x = []
+        seeker_y = []
+        
+        # Loop through the games and count the occurrences of each hider and seeker class
+        for game in games:
+            hider_class = game.hider_class.class_name
+            seeker_class = game.seeker_class.class_name
+            
+            if hider_class not in hider_x:
+                hider_x.append(hider_class)
+                hider_y.append(1)
+            else:
+                index = hider_x.index(hider_class)
+                hider_y[index] += 1
+            
+            if seeker_class not in seeker_x:
+                seeker_x.append(seeker_class)
+                seeker_y.append(1)
+            else:
+                index = seeker_x.index(seeker_class)
+                seeker_y[index] += 1
+
+        print(hider_x, hider_y, seeker_x, seeker_y)
+        
+        # Create the pie charts
+        fig_hider = fig_hider = fig_hider = go.Figure(go.Pie(labels=hider_x, values=hider_y, marker=dict(colors=['#FF69B4', '#33CC33', '#6666CC'])))
+        fig_hider.update_layout(
+            title="Hiders Played",
+        )
+        graph_pie_hider = plotly.offline.plot(fig_hider, auto_open=False, output_type='div')
+        context['graph_pie_hider'] = graph_pie_hider
+        
+        fig_seeker = fig_seeker = fig_seeker = go.Figure(go.Pie(labels=seeker_x, values=seeker_y, marker=dict(colors=['#7a378b', '#741b47', '#f56fa1', '#fae7b5', '#caa8ea'])))
+        fig_seeker.update_layout(
+            title="Seekers Played",
+        )
+        graph_pie_seeker = plotly.offline.plot(fig_seeker, auto_open=False, output_type='div')
+        context['graph_pie_seeker'] = graph_pie_seeker
+        
+        return context
+
+    
 
 class CreateProfileView(CreateView):
     '''

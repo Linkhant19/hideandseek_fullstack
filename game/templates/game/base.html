@@ -17,10 +17,7 @@
                 <li><a href="{% url 'create_game' %}">Play Game</a></li>
                 {% if user.is_authenticated %}
                     
-                    <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
-                        {% csrf_token %}
-                    </form>
-                    <li><a href="#" onclick="document.getElementById('logout-form').submit()">Log Out</a></li>
+                    
                 {% else %}
                     <!-- just for alignment -->
                     <li></li>

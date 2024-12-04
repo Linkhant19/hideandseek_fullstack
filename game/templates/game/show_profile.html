@@ -4,12 +4,58 @@
 
 {% block content %}
     <div class="background"></div>
-    <h1>Profile</h1>
+    <h1>PROFILE</h1>
     <!-- username, email, games played, games won -->
-    <ul>
-        <li>Username: {{ profile.username }}</li>
-        <li>Email: {{ profile.email }}</li>
-        <li>Games Played: {{ profile.games_played }}</li>
-        <li>Games Won: {{ profile.games_won }}</li>
-    </ul>
+    <div class="profile-container">
+        <table class="profile-table">
+            <tr>
+              <td class="table-fields">Username</td>
+              <td class="table-results">{{ profile.username }}</td>
+            </tr>
+            <tr>
+              <td class="table-fields">Email</td>
+              <td class="table-results">{{ profile.email }}</td>
+            </tr>
+            <tr>
+              <td class="table-fields">Games Finished</td>
+              <td class="table-results">{{ profile.games_played }}</td>
+            </tr>
+            <tr>
+              <td class="table-fields">Games Won</td>
+              <td class="table-results">{{ profile.games_won }}</td>
+            </tr>
+            <tr>
+              <td class="table-fields">Games Lost</td>
+              <td class="table-results">{{ games_lost }}</td>
+            </tr>
+          </table>
+    </div>
+
+    <!-- pie chart of hiders and seekers played -->
+    <div class="pie-chart">
+        <div class="pie-chart-item">
+            {% if graph_pie_hider %}
+                {{ graph_pie_hider|safe }}
+            {% endif %}
+        </div>
+        
+        <div class="pie-chart-item">
+            {% if graph_pie_seeker %}
+                {{ graph_pie_seeker|safe }}
+            {% endif %}
+        </div>
+        
+    </div>
+
+    <!-- logout button -->
+    <div class="logout-button-container">
+        <div>
+            <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
+                {% csrf_token %}
+            </form>
+            <a href="#" onclick="document.getElementById('logout-form').submit()" class="logout-button">LOG OUT</a>
+        </div>
+        
+    </div>
+    
 {% endblock %}
