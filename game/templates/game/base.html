@@ -15,16 +15,17 @@
                 <li><a href="{% url 'show_all_hiders' %}">Hiders</a></li>
                 <li><a href="{% url 'show_all_seekers' %}">Seekers</a></li>
                 <li><a href="{% url 'create_game' %}">Play Game</a></li>
-                {% if user.is_authenticated %}
+                <li><a href="{% url 'leaderboard_by_games_won' %}">Leaderboard</a></li>
+                <!-- {% if user.is_authenticated %}
                     
                     
                 {% else %}
-                    <!-- just for alignment -->
+                    
                     <li></li>
                     <li></li>
                     <li></li>
                     <li></li>
-                {% endif %}
+                {% endif %} -->
 
                 <!-- show profile picture if logged in. I will handle this later. -->
                 {% if user.is_authenticated %}

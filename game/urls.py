@@ -20,6 +20,9 @@ urlpatterns = [
     path(r'profile/<int:pk>', views.ShowProfileView.as_view(), name='show_profile'), # page for showing a specific profile
     path(r'create_profile/', views.CreateProfileView.as_view(), name='create_profile'), # page for creating a profile
     path(r'game_over/<int:pk>', views.GameOverView.as_view(), name='game_over'), # page for showing a specific game over
+    path(r'leaderboard_by_games_won/', views.LeaderboardByGamesWonView.as_view(), name='leaderboard_by_games_won'), # page for showing the leaderboard
+    path(r'leaderboard_by_games_played/', views.LeaderboardByGamesPlayedView.as_view(), name='leaderboard_by_games_played'), # page for showing the leaderboard
+    path(r'leaderboard_by_win_rate/', views.LeaderboardByWinRateView.as_view(), name='leaderboard_by_win_rate'), # page for showing the leaderboard
     
 
     path(r'login/', auth_views.LoginView.as_view(template_name='game/login.html'), name='login'),

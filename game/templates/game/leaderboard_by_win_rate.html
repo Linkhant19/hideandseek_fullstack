@@ -1,0 +1,19 @@
+<!-- game/templates/game/leaderboard_by_win_rate.html -->
+
+{% extends 'game/base.html' %}
+
+{% block content %}
+    <h1>LEADERBOARD</h1>
+    <p>by win rate</p>
+    <a href="{% url 'leaderboard_by_games_won' %}">by games won</a>
+    <a href="{% url 'leaderboard_by_win_rate' %}">by win rate</a>
+    <a href="{% url 'leaderboard_by_games_played' %}">by games played</a>
+    <ul>
+        {% for profile in profiles %}
+            <li>
+                <!-- floatformat:2 will round to 2 decimal places -->
+                {{ profile.user.username }} - {{ profile.win_rate|floatformat:2 }}% win rate
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,18 @@
+<!-- game/templates/game/leaderboard_by_games_played.html -->
+
+{% extends 'game/base.html' %}
+
+{% block content %}
+    <h1>LEADERBOARD</h1>
+    <p>by games finished</p>
+    <a href="{% url 'leaderboard_by_games_won' %}">by games won</a>
+    <a href="{% url 'leaderboard_by_win_rate' %}">by win rate</a>
+    <a href="{% url 'leaderboard_by_games_played' %}">by games played</a>
+    <ul>
+        {% for profile in profiles %}
+            <li>
+                {{ profile.user.username }} - {{ profile.games_played }} games played
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

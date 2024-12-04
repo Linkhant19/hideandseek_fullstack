@@ -14,6 +14,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login
 from django.http import JsonResponse
+from django.db.models import F, DecimalField, ExpressionWrapper, FloatField, Case, When, Value
 import random
 
 import operator
@@ -311,6 +312,65 @@ class GameOverView(DetailView):
             profile.save()
         except Exception as e:
             print(f"Error updating profile: {e}")
+
+
+class LeaderboardByGamesWonView(ListView):
+    '''
+    class-based view called LeaderboardView to show the leaderboard, inherited from ListView.
+    '''
+    model = Profile
+    template_name = 'game/leaderboard_by_games_won.html'
+    context_object_name = 'profiles'
+
+    # get a list of profiles ordered by games_won
+    def get_queryset(self):
+        '''
+        override get_queryset to order profiles by games_won
+        '''
+        return Profile.objects.order_by('-games_won')
+
+class LeaderboardByGamesPlayedView(ListView):
+    '''
+    class-based view called LeaderboardView to show the leaderboard, inherited from ListView.
+    '''
+    model = Profile
+    template_name = 'game/leaderboard_by_games_played.html'
+    context_object_name = 'profiles'
+
+    # get a list of profiles ordered by games_played
+    def get_queryset(self):
+        '''
+        override get_queryset to order profiles by games_played
+        '''
+        return Profile.objects.order_by('-games_played')
+
+class LeaderboardByWinRateView(ListView):
+    '''
+    class-based view called LeaderboardView to show the leaderboard, inherited from ListView.
+    '''
+    model = Profile
+    template_name = 'game/leaderboard_by_win_rate.html'
+    context_object_name = 'profiles'
+
+    # get a list of profiles ordered by win_rate
+    def get_queryset(self):
+        '''
+        override get_queryset to order profiles by win_rate
+        '''
+        # win_rate = (games_won / games_played) * 100
+        return Profile.objects.annotate(
+            win_rate=ExpressionWrapper(
+                Case(
+                    # If games_played is 0, set win_rate to 0.0
+                    When(games_played=0, then=Value(0.0)),
+                    # Otherwise, calculate the win_rate
+                    default=(F('games_won') * 1.0 / F('games_played')) * 100,
+                ),
+                output_field=DecimalField(max_digits=5, decimal_places=2)
+            )
+        ).order_by('-win_rate')
+        
+
 
 
     
