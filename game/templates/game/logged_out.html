@@ -5,6 +5,7 @@
 {% block content %}
 <h2>You are logged out!</h2>
 <br>
-<p>Login again here to play!</p>
-<!-- <a href="{% url 'login' %}">Login</a> -->
+<p>Login again to play!</p>
+<a href="{% url 'login' %}">Login</a>
+<a href="{% url 'main' %}">Main Menu</a>
 {% endblock %}

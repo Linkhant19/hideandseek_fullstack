@@ -5,8 +5,11 @@ body {
     margin-top: 25px;
     font-family: 'Space Grotesk', sans-serif;
     padding: 0px;
+    background-color: white;
+    transition: background-color 0.5s ease;
     /* text-align: center; */
 }
+
 
 /* start of main page css */
 h3 {
@@ -20,6 +23,20 @@ h3 {
     margin-top: 30px;
     left: 50%;
     transform: translateX(-50%);
+    transition: transform 0.5s ease;
+}
+
+.hide-title:hover {
+    animation: lifts 1s ease-out forwards;
+}
+
+.hide-title:hover ~ .seek-title {
+    animation: drowns 1s ease-out forwards;
+}
+
+.hide-title:hover ~ .small-title {
+    opacity: 1;
+    transition: opacity 3s ease;
 }
 
 .seek-title {
@@ -28,6 +45,7 @@ h3 {
     margin-top: 180px;
     left: 50%;
     transform: translateX(-50%);
+    transition: 3s ease;
 }
 
 .and-title {
@@ -38,6 +56,54 @@ h3 {
     color: white;
     left: 50%;
     transform: translateX(-50%);
+}
+
+/* .and-title {
+    display: none;
+} */
+
+.small-title {
+    position: absolute;
+    z-index: 3;
+    margin-top: 220px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    color: black;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0s ease;
+}
+
+@keyframes lifts {
+    0% {
+        transform: translateX(-50%) translateY(0px);
+    }
+    100% {
+        transform: translateX(-50%) translateY(-20px);
+    }
+}
+
+@keyframes drowns {
+    /* opposite of lifts */
+    0% {
+        transform: translateX(-50%) translateY(0px);
+    }
+    100% {
+        transform: translateX(-50%) translateY(20px);
+    }
+}
+
+@keyframes flash {
+    0% {
+      background-color: #fff;
+    }
+    50% {
+      background-color: #ff69b4;
+    }
+    100% {
+      background-color: #fff;
+    }
 }
 
 /* end of main page css */
