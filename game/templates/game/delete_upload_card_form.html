@@ -1,0 +1,16 @@
+<!-- game/templates/game/delete_upload_card_form.html -->
+
+{% extends 'game/base.html' %}
+
+{% block content %}
+<h1>Delete Upload Card</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <p>Are you sure you want to delete "{{ uploadcard.card_name }}"?</p>
+    <button type="submit">Delete</button>
+
+    <!-- link to cancel -->
+    <a href="{% url 'show_profile' user.profile.pk %}">Cancel</a>
+</form>
+{% endblock %}

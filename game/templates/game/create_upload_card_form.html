@@ -1,0 +1,23 @@
+<!-- game/templates/game/create_upload_card_form.html -->
+
+{% extends 'game/base.html' %}
+
+{% block content %}
+    <div class="background"></div>
+    <h1>Create Card</h1>
+    <form method="post" enctype="multipart/form-data">
+        <table>
+            {{ form.as_table }}
+        </table>
+        <tr>
+            <td></td>
+            <td><button type="submit">Create</button>
+                {% csrf_token %}
+            </form>
+            </td>
+        </tr>
+        </table>
+    
+    <!-- link to cancel -->
+    <a href="{% url 'show_profile' user.profile.pk %}">Cancel</a>
+{% endblock %}

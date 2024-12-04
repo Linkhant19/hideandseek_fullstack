@@ -177,7 +177,11 @@ class ShowProfileView(DetailView):
 
         # calculate games lost
         context['games_lost'] = self.object.games_played - self.object.games_won
+
+        # uploadcard model has a foreign key to profile. get the first card uploaded by this profile
+        context['uploaded_cards'] = UploadCard.objects.filter(profile=self.object).first()
         
+        print(context)
         # Get the current profile player
         profile_player = self.object
         
@@ -208,8 +212,6 @@ class ShowProfileView(DetailView):
             else:
                 index = seeker_x.index(seeker_class)
                 seeker_y[index] += 1
-
-        print(hider_x, hider_y, seeker_x, seeker_y)
         
         # Create the pie charts
         fig_hider = fig_hider = fig_hider = go.Figure(go.Pie(labels=hider_x, values=hider_y, marker=dict(colors=['#FF69B4', '#33CC33', '#6666CC'])))
@@ -369,7 +371,87 @@ class LeaderboardByWinRateView(ListView):
                 output_field=DecimalField(max_digits=5, decimal_places=2)
             )
         ).order_by('-win_rate')
-        
+
+
+class UpdateProfileView(LoginRequiredMixin, UpdateView):
+    '''
+    class-based view called UpdateProfileView to update a specific profile, inherited from UpdateView.
+    '''
+    model = Profile
+    form_class = UpdateProfileForm
+    template_name = 'game/update_profile_form.html'
+    context_object_name = 'profile'
+
+    def get_success_url(self):
+        '''return URL to redirect to the show_profile page'''
+        return reverse('show_profile', kwargs={'pk': self.object.pk})
+
+    def get_login_url(self) -> str:
+        '''return the URL required for login.'''
+        return reverse('login')
+
+    def get_object(self):
+        '''use the logged in user (self.request.user) 
+        and the object manager (Profile.objects) to locate 
+        and return the Profile corresponding to this User.'''
+        return Profile.objects.get(user=self.request.user)
+
+class DeleteUploadCardView(DeleteView):
+    '''
+    class-based view called DeleteUploadCardView to delete a specific uploadcard, inherited from DeleteView.
+    '''
+    model = UploadCard
+    template_name = 'game/delete_upload_card_form.html'
+    context_object_name = 'uploadcard'
+
+    def get_success_url(self):
+        '''return URL to redirect to the show_profile page'''
+        return reverse('show_profile', kwargs={'pk': self.object.profile.pk})
+
+
+class CreateUploadCardView(LoginRequiredMixin, CreateView):
+    '''
+    class-based view called CreateUploadCardView to create a uploadcard, inherited from CreateView.
+    '''
+    form_class = CreateUploadCardForm
+    template_name = 'game/create_upload_card_form.html'
+    
+    def get_login_url(self) -> str:
+        '''return the URL required for login.'''
+        return reverse('login')
+
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        ''' 
+        build the template context data --
+        a dict of key-value pairs.
+        '''
+
+        # get the super class version of context data
+        context = super().get_context_data(**kwargs)
+
+        # find the profile with the primary key from the URL
+        # self.kwargs is finding the profile PK from the URL
+        profile = self.get_object()
+
+        # add the profile to the context data
+        context['profile'] = profile
+        return context
+
+    def form_valid(self, form):
+        profile = self.request.user.profile
+        form.instance.profile = profile
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('show_profile', kwargs={'pk': self.object.profile.pk})
+
+    def get_object(self):
+        '''use the logged in user (self.request.user) 
+        and the object manager (Profile.objects) to locate 
+        and return the Profile corresponding to this User.'''
+        return Profile.objects.get(user=self.request.user)
+
+
 
 
 

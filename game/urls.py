@@ -23,6 +23,9 @@ urlpatterns = [
     path(r'leaderboard_by_games_won/', views.LeaderboardByGamesWonView.as_view(), name='leaderboard_by_games_won'), # page for showing the leaderboard
     path(r'leaderboard_by_games_played/', views.LeaderboardByGamesPlayedView.as_view(), name='leaderboard_by_games_played'), # page for showing the leaderboard
     path(r'leaderboard_by_win_rate/', views.LeaderboardByWinRateView.as_view(), name='leaderboard_by_win_rate'), # page for showing the leaderboard
+    path(r'update_profile/', views.UpdateProfileView.as_view(), name='update_profile'), # page for updating a profile
+    path(r'delete_upload_card/<int:pk>', views.DeleteUploadCardView.as_view(), name='delete_upload_card'), # page for deleting an upload card
+    path(r'create_upload_card/', views.CreateUploadCardView.as_view(), name='create_upload_card'), # page for creating an upload card
     
 
     path(r'login/', auth_views.LoginView.as_view(template_name='game/login.html'), name='login'),

@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="background"></div>
-    <h1>PROFILE</h1>
+    <h1 class="profile-title">PROFILE</h1>
     <!-- username, email, games played, games won -->
     <div class="profile-container">
         <table class="profile-table">
@@ -29,6 +29,42 @@
               <td class="table-results">{{ games_lost }}</td>
             </tr>
           </table>
+
+        <div class="profile-cards">
+            <!-- show profile's favorite card if it exists -->
+            {% if profile.favorite_card %}
+                <div class="favorite-card-container">
+                    <img src="{{ profile.favorite_card.image.url }}" alt="{{ profile.favorite_card.card_name }}" class="favorite-card-image">
+                </div>
+            {% endif %}
+
+            <!-- show profile's uploaded card if it exists -->
+            {% if uploaded_cards %}
+                <div class="favorite-card-container">
+                    <img src="{{ uploaded_cards.image_file.url }}" alt="{{ uploaded_cards.card_name }}" class="favorite-card-image">
+                </div>
+            {% else %}
+                <!-- else, create a new upload card -->
+                <a class='button' href="{% url 'create_upload_card' %}">Create Upload Card</a>
+            {% endif %}
+        </div>
+        
+    </div>
+
+    <!-- update profile -->
+    <div class="update-profile-container">
+      {% if request.user.is_authenticated %}
+        {% if request.user == profile.user %}
+            <!-- Update Profile -->
+            <a class='click-button' href="{% url 'update_profile' %}">Update Profile</a>
+
+            <!-- Delete the upload card if it exists and is owned by the user -->
+            {% if uploaded_cards %}
+                <a class='click-button' href="{% url 'delete_upload_card' uploaded_cards.pk %}">Delete Upload Card</a>
+            {% endif %}
+
+        {% endif %}
+      {% endif %}
     </div>
 
     <!-- pie chart of hiders and seekers played -->
@@ -53,7 +89,7 @@
             <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
                 {% csrf_token %}
             </form>
-            <a href="#" onclick="document.getElementById('logout-form').submit()" class="logout-button">LOG OUT</a>
+            <a href="#" onclick="document.getElementById('logout-form').submit()" class="click-button">LOG OUT</a>
         </div>
         
     </div>

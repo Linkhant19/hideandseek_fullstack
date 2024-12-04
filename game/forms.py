@@ -25,3 +25,22 @@ class CreateProfileForm(forms.ModelForm):
         '''associate this form with Profile model.'''
         model = Profile
         fields = ['username', 'email']
+
+
+class UpdateProfileForm(forms.ModelForm):
+    '''
+    A form to update a profile.
+    '''
+    class Meta:
+        '''associate this form with Profile model.'''
+        model = Profile
+        fields = ['username', 'email', 'favorite_card']
+
+class CreateUploadCardForm(forms.ModelForm):
+    '''
+    A form to upload a new card.
+    '''
+    class Meta:
+        '''associate this form with UploadCard model.'''
+        model = UploadCard
+        fields = ['card_name', 'description', 'image_file']

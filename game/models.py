@@ -10,11 +10,13 @@ class Profile(models.Model):
         email
         games_played
         games_won
+        favorite_card - (optional) one favorite card of this player to show on profile
     '''
     username = models.CharField(max_length=120)
     email = models.EmailField()
     games_played = models.IntegerField(default=0)
     games_won = models.IntegerField(default=0)
+    favorite_card = models.ForeignKey('Card', on_delete=models.SET_NULL, null=True, blank=True)
 
     # associate each Profile with a User
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -114,5 +116,28 @@ class Game(models.Model):
         ''' string representation of game '''
         return f'{self.player} as {self.hider_class} against {self.seeker_class}. Turn: {self.current_turn}'
 
+
+class UploadCard(models.Model):
+    '''
+    UploadCard model:
+        card_name - name of card
+        image_file - image of card
+        description - description of card
+        profile - foriegn key to profile
+    '''
+    card_name = models.CharField(max_length=100)
+    image_file = models.ImageField(blank=True, null=True)
+    description = models.TextField()
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+    def __str__(self):
+        ''' string representation of card '''
+        return f'{self.card_name} by {self.profile}'
+
+    def get_images(self):
+        '''
+        get_images returns all images associated with this UploadCard.
+        '''
+        return Image.objects.filter(upload_card=self)
 
 

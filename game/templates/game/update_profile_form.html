@@ -1,0 +1,31 @@
+<!-- game/templates/game/update_profile_form.html -->
+
+{% extends 'game/base.html' %}
+
+{% block content %}
+    <h1>Update Profile</h1>
+
+    <form method="POST">
+        <!-- display the form (context variable) -->
+        <!-- {{ form }} -->
+        <table>
+            {{ form.as_table }}
+        
+    
+        <tr>
+            <td></td>
+            <td>
+                <!-- submit button -->
+                <input type="submit" name="Post">
+                {% csrf_token %}
+            </form>
+            <!-- NOTE: this is a separate form! -->
+            <form action="{% url 'show_profile' profile.pk %}">
+                <input type="submit" name="Cancel" value="Cancel">
+            </form>
+            </td>
+        </tr>
+        
+        </table>
+    </form>
+{% endblock %}
