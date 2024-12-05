@@ -4,21 +4,38 @@
 
 {% block content %}
     <div class="background"></div>
-    <h1>Create Game</h1>
-    <form method="post">
-        <table>
-            {{ form.as_table }}
-        </table>
-        <tr>
-            <td></td>
-            <td><button type="submit">Create</button>
+
+    <!-- tutorial for how to play -->
+    <h1>NEW GAME</h1>
+    <p></p>
+
+    <div class="create-game-container"> 
+        <div class="how-to-play">
+            <h2 class="how-to-play-title">How to Play</h2>
+            <br>
+            <p>This is a Hide and Seek inspired card game!</p>
+            <p>You are the <span class="hider-text">HIDER</span>.</p>
+            <p>The goal is to survive <span class="number-text">10</span> rounds without being caught by the <span class="seeker-text">SEEKER</span>.</p>
+            <p>Use the <span class="button-p-text">Hide button</span> to hide! But, be careful, you can only hide <span class="number-text">2</span> consecutive turns.</p>
+            <p>Use the <span class="button-p-text">Play button</span> to play a random card from your deck.</p>
+            <p>If Seeker Attack! and you are not hidden, you lose!</p>
+            <p>Good luck!</p>
+        </div>
+        <div class="create-game-form">
+            <form method="post">
+                <table>
+                    {{ form.as_table }}
+                </table>
+            <div class="create-game-buttons">
                 {% csrf_token %}
+                <a class="click-button" href="#" onclick="this.parentNode.submit()">PLAY</a>
             </form>
 
-            <form action="{% url 'show_all_cards' %}">
-                <input type="submit" value="cancel">
-            </form>
-            </td>
-        </tr>
-        </table>
+            <a class="click-button" href="{% url 'show_all_cards' %}">CANCEL</a>
+            </div>
+                
+
+        </div>
+    </div>
+    
 {% endblock %}

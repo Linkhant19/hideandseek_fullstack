@@ -2,7 +2,8 @@
 
 {% extends 'game/base.html' %}
 
-{% block content %}
+<body class="profile-body">
+  {% block content %}
     <div class="background"></div>
     <h1 class="profile-title">PROFILE</h1>
     <!-- username, email, games played, games won -->
@@ -103,4 +104,5 @@
       {% endif %}
     {% endif %}
     
-{% endblock %}
+  {% endblock %}  
+</body>
