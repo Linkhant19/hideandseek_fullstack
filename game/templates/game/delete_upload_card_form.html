@@ -8,9 +8,9 @@
 <form method="post">
     {% csrf_token %}
     <p>Are you sure you want to delete "{{ uploadcard.card_name }}"?</p>
-    <button type="submit">Delete</button>
+    <a class="click-button" href="#" onclick="this.parentNode.submit()">Delete</a>
 
     <!-- link to cancel -->
-    <a href="{% url 'show_profile' user.profile.pk %}">Cancel</a>
+    <a class="click-button" href="{% url 'show_profile' user.profile.pk %}">Cancel</a>
 </form>
 {% endblock %}

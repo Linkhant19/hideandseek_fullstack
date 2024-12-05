@@ -3,9 +3,12 @@
 {% extends 'game/base.html' %}
 
 {% block content %}
-<h2>You are logged out!</h2>
-<br>
-<p>Login again to play!</p>
-<a href="{% url 'login' %}">Login</a>
-<a href="{% url 'main' %}">Main Menu</a>
+<div>
+    <h2>LOGGED OUT!</h2>
+    <br>
+    <p>Login again to play!</p>
+    <a class="click-button" href="{% url 'login' %}">Login</a>
+    <a class="click-button" href="{% url 'main' %}">Main Menu</a>
+</div>
+
 {% endblock %}

@@ -11,13 +11,18 @@
         </table>
         <tr>
             <td></td>
-            <td><button type="submit">Create</button>
-                {% csrf_token %}
-            </form>
+            <td>
+                <a class="click-button" href="#" onclick="this.parentNode.submit()">Create</a>
+                {% csrf_token %}            
+            </td>
+        </tr>
+        <tr>
+            <!-- link to cancel -->
+            <td>
+                <a class="click-button" href="{% url 'show_profile' user.profile.pk %}">Cancel</a>
             </td>
         </tr>
         </table>
+    </form>
     
-    <!-- link to cancel -->
-    <a href="{% url 'show_profile' user.profile.pk %}">Cancel</a>
 {% endblock %}

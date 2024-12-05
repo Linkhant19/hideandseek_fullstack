@@ -4,15 +4,31 @@
 
 {% block content %}
     <h1>LEADERBOARD</h1>
-    <p>by games won</p>
-    <a href="{% url 'leaderboard_by_games_won' %}">by games won</a>
-    <a href="{% url 'leaderboard_by_win_rate' %}">by win rate</a>
-    <a href="{% url 'leaderboard_by_games_played' %}">by games played</a>
-    <ul>
-        {% for profile in profiles %}
-            <li>
-                {{ profile.user.username }} - {{ profile.games_won }} wins
-            </li>
-        {% endfor %}
-    </ul>
+    <p>...by games won</p>
+    <div class="leaderboard-table-container">
+        <table class="leaderboard-table">
+            <tr>
+                <th>Name</th>
+                <th>Games Won</th>
+            </tr>
+            {% for profile in profiles %}
+                <tr>
+                    <!-- link to show_profile -->
+                    <td class="table-fields"><a href="{% url 'show_profile' profile.pk %}">{{ profile.user.username }}</a></td>
+                    <td class="table-results">{{ profile.games_won }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <div class="leaderboard-buttons-container">
+            <div>
+                <a class='click-button' href="{% url 'leaderboard_by_games_won' %}">by games won</a>
+            </div>
+            <div>
+                <a class='click-button' href="{% url 'leaderboard_by_win_rate' %}">by win rate</a>  
+            </div>
+            <div>
+                <a class='click-button' href="{% url 'leaderboard_by_games_played' %}">by games played</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

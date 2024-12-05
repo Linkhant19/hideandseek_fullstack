@@ -4,16 +4,33 @@
 
 {% block content %}
     <h1>LEADERBOARD</h1>
-    <p>by win rate</p>
-    <a href="{% url 'leaderboard_by_games_won' %}">by games won</a>
-    <a href="{% url 'leaderboard_by_win_rate' %}">by win rate</a>
-    <a href="{% url 'leaderboard_by_games_played' %}">by games played</a>
-    <ul>
-        {% for profile in profiles %}
-            <li>
-                <!-- floatformat:2 will round to 2 decimal places -->
-                {{ profile.user.username }} - {{ profile.win_rate|floatformat:2 }}% win rate
-            </li>
-        {% endfor %}
-    </ul>
+    <p>...by win rate</p>
+    <div class="leaderboard-table-container">
+        <table class="leaderboard-table">
+            <tr>
+                <th>Name</th>
+                <th>Win Rate</th>
+            </tr>
+            {% for profile in profiles %}
+                <tr>
+                    <!-- link to show_profile -->
+                    <td class="table-fields"><a href="{% url 'show_profile' profile.pk %}">{{ profile.user.username }}</a></td>
+
+                    <!-- only show two decimal places -->
+                    <td class="table-results">{{ profile.win_rate|floatformat:2 }}%</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <div class="leaderboard-buttons-container">
+            <div>
+                <a class='click-button' href="{% url 'leaderboard_by_games_won' %}">by games won</a>
+            </div>
+            <div>
+                <a class='click-button' href="{% url 'leaderboard_by_win_rate' %}">by win rate</a>  
+            </div>
+            <div>
+                <a class='click-button' href="{% url 'leaderboard_by_games_played' %}">by games played</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}
