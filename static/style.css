@@ -781,8 +781,7 @@ h1 {
 
 /* start of leaderboard views */
 
-p {
-    /* text-align: center; */
+.leaderboard-subtitle {
     font-weight: 900;
     font-size: 20px;
     letter-spacing: .2em;
