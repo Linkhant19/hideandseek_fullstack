@@ -25,148 +25,11 @@ body {
     /* font-family: 'kamikaze'; */
     padding: 0px;
     background-color: #faca78;
-    /* background: url('images/background19.gif') padding-box,
-      conic-gradient(
-          from var(--border-angle),
-          oklch(100% 100% 0deg),
-          oklch(100% 100% 45deg),
-          oklch(100% 100% 90deg),
-          oklch(100% 100% 135deg),
-          oklch(100% 100% 180deg),
-          oklch(100% 100% 225deg),
-          oklch(100% 100% 270deg),
-          oklch(100% 100% 315deg),
-          oklch(100% 100% 360deg)
-        )
-        border-box;
-    background-blend-mode: hard-light;  */
-
-    /* background-image: url('images/background22.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-blend-mode: normal; */
-    /* background-image: url('images/background25gif.gif');
-    background-size: 10% 10%; */
-    /* opacity: 0.5; */
-    /* transition: background-color 0.5s ease; */
 }
-
-.main-body {
-    background-color: #faca78;
-    /* background-repeat: no-repeat;
-    background-size: cover; */
-    background-image: none;
-    background-blend-mode: normal;
-}
-
-
-/* start of main page css */
-/* h3 {
-    text-align: center;
-    font-size: 200px;
-    color: #f37d59;
-    text-shadow: 
-        2px 2px 0px black,   
-        -2px 2px 0px black,  
-        2px -2px 0px black, 
-        -2px -2px 0px black; 
-}
-
-.hide-title {
-    position: absolute;
-    z-index: 1;
-    margin-top: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: transform 0.5s ease;
-}
-
-.hide-title:hover {
-    animation: lifts 1s ease-out forwards;
-}
-
-.hide-title:hover ~ .seek-title {
-    animation: drowns 1s ease-out forwards;
-}
-
-.hide-title:hover ~ .small-title {
-    opacity: 1;
-    transition: opacity 3s ease;
-}
-
-.seek-title {
-    position: absolute;
-    z-index: 2;
-    margin-top: 180px;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: 3s ease;
-}
-
-.seek-title:hover {
-    opacity: 0;
-}
-
-.and-title {
-    position: absolute;
-    z-index: 3;
-    margin-top: 105px;
-    font-family: 'Times New Roman', Times, serif;
-    color: #faca78;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.and-title {
-    text-shadow: none;
-    transition: 1.5s ease;
-}
-
-.small-title {
-    position: absolute;
-    z-index: 3;
-    margin-top: 220px;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 20px;
-    color: black;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0s ease;
-}
-
-@keyframes lifts {
-    0% {
-        transform: translateX(-50%) translateY(0px);
-    }
-    100% {
-        transform: translateX(-50%) translateY(-20px);
-    }
-}
-
-@keyframes drowns {
-    0% {
-        transform: translateX(-50%) translateY(0px);
-    }
-    100% {
-        transform: translateX(-50%) translateY(20px);
-    }
-}
-
-@keyframes flash {
-    0% {
-      background-color: #fff;
-    }
-    50% {
-      background-color: #ff69b4;
-    }
-    100% {
-      background-color: #fff;
-    }
-} */
 
 h3 {
     text-align: center;
+    font-family: 'rocher';
     font-size: 250px;
     color: #f37d59;
     text-shadow: 
@@ -187,16 +50,43 @@ h3 {
 }
 
 .hide-title:hover {
-    animation: lifts 1s ease-out forwards;
+    animation: lifts 2.5s ease-out forwards;
 }
 
 .hide-title:hover ~ .seek-title {
-    animation: drowns 1s ease-out forwards;
+    animation: drowns 2.5s ease-out forwards;
+}
+
+.hide-title:hover ~ .and-title1 {
+    animation: drowns1 2.5s ease-out forwards;
+    opacity: 1;
+    transition: opacity 2.5s ease;
+}
+
+.hide-title:hover ~ .and-title2 {
+    animation: drowns2 2.5s ease-out forwards;
+}
+
+.hide-title:hover ~ .and-title3 {
+    animation: drowns3 2.5s ease-out forwards;
+    opacity: 0;
+    transition: opacity 2.5s ease;
+}
+
+.hide-title:hover ~ .and-title4 {
+    animation: drowns4 2.5s ease-out forwards;
+}
+
+.hide-title:hover ~ .and-title5 {
+    animation: drowns5 2.5s ease-out forwards;
+    opacity: 1;
+    transition: opacity 2.5s ease;
 }
 
 .hide-title:hover ~ .small-title {
+    animation: drowns_r 2.5s ease-out forwards;
     opacity: 1;
-    transition: opacity 3s ease;
+    transition: opacity 2.5s ease;
 }
 
 .seek-title {
@@ -213,33 +103,56 @@ h3 {
     opacity: 0;
 }
 
-.and-title {
+.and-title1, .and-title2, .and-title3, .and-title4, .and-title5, .small-title {
+    opacity: 1;
     position: absolute;
-    z-index: 3;
-    margin-top: 55px;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 260px;
+    z-index: 1;
+    margin-top: 165px;
+    /* font-family: 'Times New Roman', Times, serif; */
+    font-family: 'rocher';
+    font-palette: --Mint;
+    font-size: 50px;
     color: #faca78;
     left: 50%;
-    transform: translateX(-50%);
-}
-
-.and-title {
+    /* transform: translateX(-120px); */
     text-shadow: none;
     transition: 1.5s ease;
-    
+}
+
+.and-title1 {
+    transform: translateX(-120px);
+    opacity: 0;
+    transition: opacity 0s ease;
+}
+
+.and-title2 {
+    transform: translateX(35px);
+    transition: opacity 0s ease;
+}
+
+.and-title3 {
+    transform: translateX(70px);
+    transition: opacity 0s ease;
+}
+
+.and-title4 {
+    transform: translateX(112px);
+    transition: opacity 0s ease;
+}
+
+.and-title5 {
+    transform: translateX(170px);
+    opacity: 0;
+    transition: opacity 0s ease;
 }
 
 .small-title {
-    position: absolute;
-    z-index: 3;
-    margin-top: 190px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 40px;
-    font-weight: bold;
-    color: #764838;
-    left: 50%;
-    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0s ease;
+    transform: translate(72px);
+}
+
+.appear-text {
     opacity: 0;
     transition: opacity 0s ease;
 }
@@ -262,6 +175,61 @@ h3 {
     }
 }
 
+@keyframes drowns1 {
+    0% {
+        transform: translateX(-120px) translateY(0px);
+    }
+    100% {
+        transform: translateX(-120px) translateY(30px);
+    }
+}
+
+@keyframes drowns2 {
+    0% {
+        transform: translateX(35px) translateY(0px);
+    }
+    100% {
+        transform: translateX(35px) translateY(30px);
+    }
+}
+
+@keyframes drowns3 {
+    0% {
+        transform: translateX(70px) translateY(0px);
+    }
+    100% {
+        transform: translateX(70px) translateY(30px);
+    }
+}
+
+@keyframes drowns4 {
+    0% {
+        transform: translateX(112px) translateY(0px);
+    }
+    100% {
+        transform: translateX(112px) translateY(30px);
+    }
+}
+
+@keyframes drowns5 {
+    0% {
+        transform: translateX(170px) translateY(0px);
+    }
+    100% {
+        transform: translateX(170px) translateY(30px);
+    }
+}
+
+@keyframes drowns_r {
+    0% {
+        transform: translateX(72px) translateY(0px);
+    }
+    100% {
+        transform: translateX(72px) translateY(30px);
+    }
+}
+
+
 @keyframes flash {
     0% {
       background-color: #fff;
@@ -283,14 +251,7 @@ header {
     align-items: center;
 }
 
-header * {
-    display: inline;
-    color: black;
-    text-decoration: none;
-}
-
 header img {
-    /* height: 50px; */
     height: 80px;
     width: auto;
     margin-right: -20px;
@@ -301,13 +262,32 @@ nav {
     align-items: center;
 }
 
-nav * {
-    margin: 20px;
-    margin-top: 0px;
+nav a {
+    margin: 37px;
+    margin-top: 15px;
+    color: black;
+    text-decoration: none;
 }
 
 nav img {
     margin-top: 10px;
+}
+
+/* To improve: it currently moves the other text on hover because the font is not the same size. */
+nav a:hover {
+    font-family: 'gunplay';
+    font-weight: bold;
+    /* color: #ff6213; */
+    font-size: 20px;
+}
+
+/* the style for when the user is on the current page! */
+nav a.active {
+    font-family: 'gunplay';
+    font-weight: bold;
+    color: #ff6213;
+    font-size: 20px;
+
 }
 
 .profile-header {
@@ -315,6 +295,8 @@ nav img {
 }
 /* end of header and nav bar css */
 
+
+/* start of showing cards.  */
 h1 {
     font-family: 'Rocher', sans-serif;
     text-align: center;
@@ -322,11 +304,6 @@ h1 {
     margin-top: -25px;
     margin-bottom: -15px;
     color: #764838;
-    /* text-shadow: 
-        2px 2px 0px black,   
-        -2px 2px 0px black,  
-        2px -2px 0px black, 
-        -2px -2px 0px black;  */
     text-shadow: 
         1.1px 1.1px 0px white,   
         -1.1px 1.1px 0px white,  
@@ -619,10 +596,6 @@ h1 {
 
 
 /* start of show profile view */
-.muddy-body {
-    background-image: url('images/background32.png');
-    background-size: cover;
-}
 
 .pie-chart {
     display: flex;
@@ -790,7 +763,7 @@ h1 {
     cursor: pointer;
     text-decoration: none;
     font-weight: bold;
-    border: 3px solid black;
+    /* border: 3px solid black; */
     background-color: #f37d59;
     padding: 10px;
     transition: 1s ease;
@@ -871,10 +844,6 @@ h1 {
     /* justify-content: top; */
     gap: 40px;
 }
-
-/* tbody {
-    padding-left: 30px;
-} */
 
 /* end of leaderboard views */
 
@@ -979,9 +948,6 @@ h1 {
 }
 
 .hider-text:hover, .seeker-text:hover {
-    /* color: #764838;
-    font-size: 22px; */
-    /* text-shadow: 0px 2px 4px hsl(0 0% 0%/ 50%); */
 
     text-shadow: 10px 2px 4px hsl(0 0% 0%/ 50%);
 }
@@ -1007,4 +973,37 @@ h1 {
 .button-p-text:hover {
     color: white;
     background-color: black;
+}
+
+/* end of create game view */
+
+
+/* these are my different body backgrounds. */
+.light-body {
+    background-color: #faca78;
+    background-image: url('images/background46.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: normal;
+}
+
+.pink-body {
+    background-color: #faca78;
+    background-image: url('images/background44.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: normal;
+}
+
+.muddy-body {
+    background-image: url('images/background32.png');
+    background-size: cover;
+}
+
+.main-body {
+    background-color: #faca78;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('images/background38.jpg');
+    background-blend-mode: normal;
 }

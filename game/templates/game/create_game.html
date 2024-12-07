@@ -1,5 +1,7 @@
 <!-- game/templates/game/create_game.html -->
 
+<body class="main-body">
+
 {% extends 'game/base.html' %}
 
 {% block content %}
@@ -27,8 +29,8 @@
                     {{ form.as_table }}
                 </table>
             <div class="create-game-buttons">
+                <button class="click-button" type="submit">CREATE GAME</button>
                 {% csrf_token %}
-                <a class="click-button" href="#" onclick="this.parentNode.submit()">PLAY</a>
             </form>
 
             <a class="click-button" href="{% url 'show_all_cards' %}">CANCEL</a>
@@ -39,3 +41,5 @@
     </div>
     
 {% endblock %}
+    
+</body>

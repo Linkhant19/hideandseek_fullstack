@@ -5,29 +5,23 @@
 <html>
     <head>
         <title>Hide and Seek</title>
-        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <link rel="stylesheet" href="{% static 'style2.css' %}">
     </head>
     <body>
         <header> 
             <nav>
-                <a href="{% url 'main' %}"><img src="{% static 'images/logo2.gif' %}" alt="logo"></a>   
-                <li><a href="{% url 'show_all_cards' %}">All Cards</a></li>
-                <li><a href="{% url 'show_all_hiders' %}">Hiders</a></li>
-                <li><a href="{% url 'show_all_seekers' %}">Seekers</a></li>
-                <li><a href="{% url 'create_game' %}">Play Game</a></li>
-                <li><a href="{% url 'leaderboard_by_games_won' %}">Leaderboard</a></li>
-                <!-- {% if user.is_authenticated %}
-                    
-                    
-                {% else %}
-                    
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                {% endif %} -->
+                <!-- nav bar links! -->
+                <a href="{% url 'main' %}"><img src="{% static 'images/logo3.gif' %}" alt="logo"></a>
+                <a href="{% url 'show_all_cards' %}" class="{% if request.path == '/show_all_cards/' %}active{% endif %}">All Cards</a>
+                <a href="{% url 'show_all_hiders' %}" class="{% if request.path == '/hiders/' %}active{% endif %}">Hiders</a>
+                <a href="{% url 'show_all_seekers' %}" class="{% if request.path == '/seekers/' %}active{% endif %}">Seekers</a>
+                <a href="{% url 'create_game' %}" class="{% if request.path == '/create_game/' %}active{% endif %}">Play Game</a>
+                <a href="{% url 'leaderboard_by_games_won' %}" class="{% if request.path == '/leaderboard_by_games_won/' %}active{% elif request.path == '/leaderboard_by_games_played/' %}active{% elif request.path == '/leaderboard_by_win_rate/' %}active{% endif %}">Leaderboard</a>
 
-                <!-- show profile picture if logged in. I will handle this later. -->
+
+
+
+                <!-- Improvement idea: show user profile picture if logged in. -->
                 {% if user.is_authenticated %}
                     <!-- redirects to this specific user's profile -->
                     <a class="profile-header" href="{% url 'show_profile' user.profile.pk %}">Profile</a>
@@ -40,6 +34,4 @@
         {% block content %}
         {% endblock %}
     </body>
-    <!-- gonna work on the script later. -->
-    <script src="{% static 'script.js' %}"></script>
 </html>
