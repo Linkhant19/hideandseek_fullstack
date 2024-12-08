@@ -252,9 +252,9 @@ header {
 }
 
 header img {
-    height: 80px;
+    height: 70px;
     width: auto;
-    margin-right: -20px;
+    /* margin-right: -20px; */
 }
 
 nav {
@@ -432,11 +432,14 @@ h1 {
 .search-form {
     display: flex;
     background-color: #fff;
+    background-image: url('images/background47.png');
+    background-repeat: no-repeat;
+    background-size: cover;
     padding: 20px;
     padding-left: 300px;
     padding-right: 400px;
-    border-radius: 20px;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+    /* border-radius: 20px; */
+    /* box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3); */
 }
 
 .search-form h2 {
