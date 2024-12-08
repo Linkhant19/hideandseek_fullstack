@@ -1,3 +1,7 @@
+<!-- game/templates/game/game.html -->
+
+<body class="blue-body">
+    
 {% extends 'game/base.html' %}
 
 {% block content %}
@@ -25,7 +29,7 @@
                 </div>
 
                 <div class="hider-plays">
-                    <p id="hider-plays">Hider</p>
+                    <p id="hider-plays">Hider's actions will be here!</p>
                     <div id="hider-card-played" class="card-played"></div>
                 </div>
             </div>
@@ -37,7 +41,7 @@
                     <img src="{{ game.seeker_class.image.url }}" alt="{{ game.seeker_class.class_name }}">
                 </div>
                 <div class="seeker-plays">
-                    <p id="seeker-plays">Seeker</p>
+                    <p id="seeker-plays">Seeker's actions will be here!</p>
                     <div id="seeker-card-played" class="card-played"></div>
                 </div>
             </div>
@@ -63,6 +67,11 @@
 
     </div>
 
+    <!-- I will use hiddenTurns to show how many consecutive turns hider has hidden -->
+    <div class="hide-left">
+        <p id="hidden-turns">👁️‍🗨️👁️‍🗨️</p>
+    </div>
+
     <!-- Inline JavaScript -->
     <script>
         // Initialize Game State
@@ -70,7 +79,23 @@
             turn: 0,
             isHiding: false,
             // variable to keep track of how many consective turns hider has hidden
-            hiddenTurns: 0
+            hiddenTurns: 0,
+
+
+            /* 
+            these variables relate to hider status
+            */
+            // variable to keep track of if hider is shielded
+            isShielded: false,
+            // variable to keep track of if hider is frozen. 
+            isFrozen: 0,
+
+
+            /* 
+            these variables relate to seeker status
+            */
+            // variable to keep track of if seeker is trashed
+            isTrashed: false,
         };
 
         // My play Button Logic
@@ -79,12 +104,26 @@
             const hiderCardPlayedElement = document.getElementById("hider-card-played");
             hiderCardPlayedElement.innerHTML = "";
 
-            // Update the hider-image's border color to black
+            // Update the hider-image's to remove the grayscale filter
             const hiderImage = document.querySelector(".hider-image img");
-            hiderImage.style.borderColor = "black";
+            hiderImage.style.filter = "none";
+
 
             const hiderCards = document.querySelectorAll("#hider-card-list .card-list-item img"); // we will get the hider's cards from html with selector
             const randomCard = hiderCards[Math.floor(Math.random() * hiderCards.length)];
+
+            // if randomCard is 'Shielded!', set isShielded to true
+            if (randomCard.getAttribute("alt") === "Shielded!") {
+                gameState.isShielded = true;
+                console.log("gameState.isShielded: ", gameState.isShielded);
+            }
+
+            // if randomCard is 'Trash Cannon', set isTrashed to true
+            if (randomCard.getAttribute("alt") === "Trash Cannon") {
+                gameState.isTrashed = true;
+                console.log("gameState.isTrashed: ", gameState.isTrashed);
+            }
+
             const hiderAction = `Hider played ${randomCard.getAttribute("alt")}.`;
 
             // Update Hider Card Played
@@ -94,6 +133,9 @@
             gameState.isHiding = false; // Not hiding if Hider plays a card
             // reset the hiddenTurns variable
             gameState.hiddenTurns = 0;
+            // reset the html
+            document.getElementById('hidden-turns').innerText = "👁️‍🗨️👁️‍🗨️";
+
             handleTurn(hiderAction);
         });
 
@@ -103,43 +145,87 @@
             const hiderCardPlayedElement = document.getElementById("hider-card-played");
             hiderCardPlayedElement.innerHTML = "";
 
+            // if frozen is higher than 0, do not hide
+            if (gameState.isFrozen > 0) {
+                document.getElementById('hider-plays').innerText = "You are frozen! You cannot hide this turn.";
+                document.getElementById('seeker-plays').innerText = "Ha Ha Ha!";
+                return;
+            }
 
             // can only hide if Hider has not hidden for 2 consecutive turns
             if (gameState.hiddenTurns < 2) {
                 gameState.hiddenTurns++;
+                if (gameState.hiddenTurns === 1) {
+                    document.getElementById('hidden-turns').innerText = "👁️‍🗨️";
+                } else {
+                    document.getElementById('hidden-turns').innerText = "";
+                }
                 gameState.isHiding = true;
-                handleTurn("Hider chose to hide.");
+                handleTurn("You are hiding. You are invulnerable!");
             } else {
-                document.getElementById('hider-plays').innerText = "Hider cannot hide anymore.";
-                document.getElementById('seeker-plays').innerText = "Please choose another action.";
+                document.getElementById('hider-plays').innerText = "Hider cannot hide anymore. Please choose another action.";
+                document.getElementById('seeker-plays').innerText = "Hider cannot hide anymore.";
                 return;
             }  
 
-            // update the hider-image's border color to red
+            // update the hider-image's and add the grayscale filter
             const hiderImage = document.querySelector(".hider-image img");
-            hiderImage.style.borderColor = "red";
+            hiderImage.style.filter = "grayscale(100%)";
 
         });
 
         // Seeker Plays Random Card
         function seekerTurn() {
-            /* 
-            get all seeker cards and return a random card's name and type. 
+            /*
+            Get all seeker cards and return a random card's name, type, and image.
             */
 
             // Update Seeker Card Played to none
             const seekerCardPlayedElement = document.getElementById("seeker-card-played");
             seekerCardPlayedElement.innerHTML = "";
 
-            const seekerCards = document.querySelectorAll("#seeker-card-list .card-list-item img");
+            // Default seeker cards from DOM
+            let seekerCards = document.querySelectorAll("#seeker-card-list .card-list-item img");
+
+            // If isTrashed is true, create a custom deck
+            if (gameState.isTrashed) {
+                gameState.isTrashed = false;
+                const trashedDeck = [
+                    { name: 'Cardboard', image: 'Cardboard.png', type: 'normal' },
+                    { name: 'Cardboard', image: 'Cardboard.png', type: 'normal' },
+                    { name: 'Cardboard', image: 'Cardboard.png', type: 'normal' },
+                    { name: 'Cardboard', image: 'Cardboard.png', type: 'normal' },
+                    { name: 'Cardboard', image: 'Cardboard.png', type: 'normal' },
+                    { name: 'Cardboard', image: 'Cardboard.png', type: 'normal' },
+                    { name: 'Cardboard', image: 'Cardboard.png', type: 'normal' },
+                    { name: 'Cardboard', image: 'Cardboard.png', type: 'normal' },
+                    { name: 'Cardboard', image: 'Cardboard.png', type: 'normal' },
+                    { name: 'Attack!', image: 'Attack.png', type: 'attack' }
+                ];
+
+                // Map trashedDeck to DOM-like elements for consistent handling
+                seekerCards = trashedDeck.map(card => {
+                    const cardElement = document.createElement('img');
+                    cardElement.src = `/static/images/${card.image}`; 
+                    cardElement.alt = card.name;
+                    cardElement.setAttribute("data-card-type", card.type); 
+                    return cardElement;
+                });
+            }
+
+            // this is just for my debugging
             console.log(seekerCards);
+
+            // we choose a random card
             const randomCard = seekerCards[Math.floor(Math.random() * seekerCards.length)];
+
             return {
                 name: randomCard.getAttribute("alt"),
                 type: randomCard.getAttribute("data-card-type"),
                 image: randomCard.src,
             };
         }
+
 
 
         // Handle Each Turn
@@ -150,7 +236,20 @@
 
             // Seeker's Turn
             const seekerCard = seekerTurn();
-            const seekerAction = `Seeker played ${seekerCard.name}.`;
+            let seekerAction = `Seeker played ${seekerCard.name}.`;
+
+            // if randomCard drawn for seeker is 'Rewind', reduce turn by 1 
+            if (seekerCard.name === "Rewind") {
+                seekerAction = `Seeker played ${seekerCard.name}. Turn reduced by 1.`;
+                gameState.turn--;
+            }
+
+            // if randomCard drawn for seeker is 'Ice Chains', freeze the hider
+            if (seekerCard.name === "Ice Chains") {
+                gameState.isFrozen = 2;
+                seekerAction = `Seeker played ${seekerCard.name}. Hider cannot hide!`;
+                console.log("gameState.isFrozen: ", gameState.isFrozen);
+            }
 
             // Update Seeker Card Played
             const seekerCardPlayedElement = document.getElementById("seeker-card-played");
@@ -165,41 +264,60 @@
 
             // I need this to lead to a Game Over page.
             if (!gameState.isHiding && seekerCard.name === "Attack!") {
-                result = "lose";
-                // hide the hide and play buttons
-                document.getElementById("hide-btn").style.display = "none";
-                document.getElementById("play-btn").style.display = "none";
-                // show the continue button
-                document.getElementById("continue-btn").style.display = "block";
+                // check if the hider is shielded
+                if (gameState.isShielded) {
+                    // remove the shield. game continues.  
+                    document.getElementById("hider-plays").innerText = hiderAction + "Shield removed!";
+                    gameState.isShielded = false;
+                }
+                else {
+                    result = "lose";
+                    // hide the hide and play buttons
+                    document.getElementById("hide-btn").style.display = "none";
+                    document.getElementById("play-btn").style.display = "none";
+                    // hide the hiden turns
+                    document.getElementById("hidden-turns").style.display = "none";
+                    // show the continue button
+                    document.getElementById("continue-btn").style.display = "block";
 
-                // update the href of the continue button
-                const gameOverUrl = `{% url 'game_over' game.pk %}`;
-                document.getElementById("continue-btn").parentNode.href = `${gameOverUrl}?result=lose`;
-                setTimeout(() => {
-                    const gameStatusElement = document.getElementById("game-status");
-                    gameStatusElement.style.opacity = "0";
+                    // update the href of the continue button
+                    const gameOverUrl = `{% url 'game_over' game.pk %}`;
+                    document.getElementById("continue-btn").parentNode.href = `${gameOverUrl}?result=lose`;
                     setTimeout(() => {
-                        gameStatusElement.innerText = "Hider lost! Game over.";
-                        gameStatusElement.style.opacity = "1";
-                    }, 500);
-                    
-                }, 1000);
-                return;
+                        const gameStatusElement = document.getElementById("game-status");
+                        gameStatusElement.style.opacity = "0";
+                        setTimeout(() => {
+                            gameStatusElement.innerText = "You lost! Game over.";
+                            gameStatusElement.style.opacity = "1";
+                        }, 500);
+                        
+                    }, 1000);
+                    return;
+                }
+
+
+                
             }
 
             // Update Game State
             gameState.turn++;
             document.getElementById("game-status").innerText = `Current Turn: ${gameState.turn}`;
 
-            
+            // if fronzen is greater than 0, reduce it by 1
+            if (gameState.isFrozen > 0) {
+                gameState.isFrozen--;
+            }
+
 
             // If turn reaches 10, game is over and Hider wins
             if (gameState.turn === 10) {
                 result = "win";
-                document.getElementById("game-status").innerText = "Hider won! Game over.";
+                document.getElementById("game-status").innerText = "You won! Game over.";
                 // hide the hide and play buttons
                 document.getElementById("hide-btn").style.display = "none";
                 document.getElementById("play-btn").style.display = "none";
+                // hide the hiden turns
+                document.getElementById("hidden-turns").style.display = "none";
                 // show the continue button
                 document.getElementById("continue-btn").style.display = "block";
 
@@ -220,3 +338,5 @@
 
     </script>
 {% endblock %}
+
+</body>

@@ -415,20 +415,24 @@ h1 {
     transform: perspective(1500px) translateY(-5%) rotateX(45deg) translateZ(0);
 }
 
+/* one hero profile */
 .one-hero-container {
     display: flex;
-    position: relative;
-    /* width: 400px; */
-    margin: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 20px;
+    z-index: 1;
 }
 
-.one-hero-container img {
-    width: 500px;
+/* .one-hero-container img {
+    width: 200px;
     height: auto; 
     opacity: 100%;
     border: 7px inset black;
-}
+} */
+/* end of one hero profile */
 
 /* for search bar */
 .search-container {

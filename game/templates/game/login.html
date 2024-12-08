@@ -3,24 +3,29 @@
 {% extends 'game/base.html' %}
 
 {% block content %}
-<h2>Login</h2>
-<form method="POST" action="{% url 'login' %}">
-    {% csrf_token %}
-    {{ form }}
+<div class="login-container">
+    <h2>Login</h2>
+    <form method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{ form }}
 
-    <!-- only do this if we don't have next attrible already -->
-    {% if not next %}
-        <input type="hidden" name="next" value="{% url 'main' %}">
-    {% else %}
-        <input type="hidden" name="next" value="{{ next }}">
-    {% endif %}
-        <input type="submit" value="Login">
+        <!-- only do this if we don't have next attrible already -->
+        {% if not next %}
+            <input type="hidden" name="next" value="{% url 'main' %}">
+        {% else %}
+            <input type="hidden" name="next" value="{{ next }}">
+        {% endif %}
+            <input class="click-button" type="submit" value="Login">
 
-</form>
+    </form>
 
-<!-- or create a new profile -->
+    <!-- or create a new profile -->
 
-<form action="{% url 'create_profile' %}">
-    <input type="submit" value="Create Profile">
-</form>
+    <form action="{% url 'create_profile' %}">
+        <input class="click-button" type="submit" value="Create Profile" style="margin-right: 120px;">
+    </form>
+</div>
+
+
+
 {% endblock %}
