@@ -1,16 +1,1014 @@
+/* I am importing from google fonts and my files */
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One&family=Kalnia+Glaze:wght@100..700&family=Nabla&family=New+Amsterdam&family=Sixtyfour+Convergence&family=Space+Grotesk:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One&family=Kalnia+Glaze:wght@100..700&family=Nabla&family=New+Amsterdam&family=Nothing+You+Could+Do&family=Sixtyfour+Convergence&family=Space+Grotesk:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One&family=DotGothic16&family=Kalnia+Glaze:wght@100..700&family=Nabla&family=New+Amsterdam&family=Nothing+You+Could+Do&family=Sixtyfour+Convergence&family=Space+Grotesk:wght@300..700&display=swap');
+@font-face {
+    font-family: 'Rocher';
+    src: url(https://assets.codepen.io/9632/RocherColorGX.woff2);
+}
+@font-palette-values --Mint {
+    font-family: Rocher;
+    base-palette: 7;
+}
+@font-face {
+    font-family: 'kamikaze';
+    src: url('fonts/kamikaze.3d-gradient-italic.ttf')
+}
+@font-face {
+    font-family: 'gunplay';
+    src: url('fonts/gunplay.3d-regular.otf');
+}
+
+body {
+    margin-top: 25px;
+    font-family: 'Space Grotesk', sans-serif;
+    /* font-family: 'kamikaze'; */
+    padding: 0px;
+    background-color: #faca78;
+    /* background: url('images/background19.gif') padding-box,
+      conic-gradient(
+          from var(--border-angle),
+          oklch(100% 100% 0deg),
+          oklch(100% 100% 45deg),
+          oklch(100% 100% 90deg),
+          oklch(100% 100% 135deg),
+          oklch(100% 100% 180deg),
+          oklch(100% 100% 225deg),
+          oklch(100% 100% 270deg),
+          oklch(100% 100% 315deg),
+          oklch(100% 100% 360deg)
+        )
+        border-box;
+    background-blend-mode: hard-light;  */
+
+    /* background-image: url('images/background22.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: normal; */
+    /* background-image: url('images/background25gif.gif');
+    background-size: 10% 10%; */
+    /* opacity: 0.5; */
+    /* transition: background-color 0.5s ease; */
+}
+
+.main-body {
+    background-color: #faca78;
+    /* background-repeat: no-repeat;
+    background-size: cover; */
+    background-image: none;
+    background-blend-mode: normal;
+}
+
+
+/* start of main page css */
+/* h3 {
+    text-align: center;
+    font-size: 200px;
+    color: #f37d59;
+    text-shadow: 
+        2px 2px 0px black,   
+        -2px 2px 0px black,  
+        2px -2px 0px black, 
+        -2px -2px 0px black; 
+}
+
+.hide-title {
+    position: absolute;
+    z-index: 1;
+    margin-top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: transform 0.5s ease;
+}
+
+.hide-title:hover {
+    animation: lifts 1s ease-out forwards;
+}
+
+.hide-title:hover ~ .seek-title {
+    animation: drowns 1s ease-out forwards;
+}
+
+.hide-title:hover ~ .small-title {
+    opacity: 1;
+    transition: opacity 3s ease;
+}
+
+.seek-title {
+    position: absolute;
+    z-index: 2;
+    margin-top: 180px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: 3s ease;
+}
+
+.seek-title:hover {
+    opacity: 0;
+}
+
+.and-title {
+    position: absolute;
+    z-index: 3;
+    margin-top: 105px;
+    font-family: 'Times New Roman', Times, serif;
+    color: #faca78;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.and-title {
+    text-shadow: none;
+    transition: 1.5s ease;
+}
+
+.small-title {
+    position: absolute;
+    z-index: 3;
+    margin-top: 220px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    color: black;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0s ease;
+}
+
+@keyframes lifts {
+    0% {
+        transform: translateX(-50%) translateY(0px);
+    }
+    100% {
+        transform: translateX(-50%) translateY(-20px);
+    }
+}
+
+@keyframes drowns {
+    0% {
+        transform: translateX(-50%) translateY(0px);
+    }
+    100% {
+        transform: translateX(-50%) translateY(20px);
+    }
+}
+
+@keyframes flash {
+    0% {
+      background-color: #fff;
+    }
+    50% {
+      background-color: #ff69b4;
+    }
+    100% {
+      background-color: #fff;
+    }
+} */
+
+h3 {
+    text-align: center;
+    font-size: 250px;
+    color: #f37d59;
+    text-shadow: 
+        2px 2px 0px black,   
+        -2px 2px 0px black,  
+        2px -2px 0px black, 
+        -2px -2px 0px black; 
+}
+
+.hide-title {
+    position: absolute;
+    z-index: 1;
+    margin-top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: transform 0.5s ease;
+    cursor: pointer;
+}
+
+.hide-title:hover {
+    animation: lifts 1s ease-out forwards;
+}
+
+.hide-title:hover ~ .seek-title {
+    animation: drowns 1s ease-out forwards;
+}
+
+.hide-title:hover ~ .small-title {
+    opacity: 1;
+    transition: opacity 3s ease;
+}
+
+.seek-title {
+    position: absolute;
+    z-index: 2;
+    margin-top: 155px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: 3s ease;
+    cursor: pointer;
+}
+
+.seek-title:hover {
+    opacity: 0;
+}
+
+.and-title {
+    position: absolute;
+    z-index: 3;
+    margin-top: 55px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 260px;
+    color: #faca78;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.and-title {
+    text-shadow: none;
+    transition: 1.5s ease;
+    
+}
+
+.small-title {
+    position: absolute;
+    z-index: 3;
+    margin-top: 190px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+    color: #764838;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0s ease;
+}
+
+@keyframes lifts {
+    0% {
+        transform: translateX(-50%) translateY(0px);
+    }
+    100% {
+        transform: translateX(-50%) translateY(-30px);
+    }
+}
+
+@keyframes drowns {
+    0% {
+        transform: translateX(-50%) translateY(0px);
+    }
+    100% {
+        transform: translateX(-50%) translateY(30px);
+    }
+}
+
+@keyframes flash {
+    0% {
+      background-color: #fff;
+    }
+    50% {
+      background-color: #ff69b4;
+    }
+    100% {
+      background-color: #fff;
+    }
+}
+
+/* end of main page css */
+
+
+/* start of header and nav bar css */
+header {
+    display: flex;
+    align-items: center;
+}
+
+header * {
+    display: inline;
+    color: black;
+    text-decoration: none;
+}
+
+header img {
+    /* height: 50px; */
+    height: 80px;
+    width: auto;
+    margin-right: -20px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav * {
+    margin: 20px;
+    margin-top: 0px;
+}
+
+nav img {
+    margin-top: 10px;
+}
+
+.profile-header {
+    margin-left: 485px;
+}
+/* end of header and nav bar css */
+
+h1 {
+    font-family: 'Rocher', sans-serif;
+    text-align: center;
+    font-size: 100px;
+    margin-top: -25px;
+    margin-bottom: -15px;
+    color: #764838;
+    /* text-shadow: 
+        2px 2px 0px black,   
+        -2px 2px 0px black,  
+        2px -2px 0px black, 
+        -2px -2px 0px black;  */
+    text-shadow: 
+        1.1px 1.1px 0px white,   
+        -1.1px 1.1px 0px white,  
+        1.1px -1.1px 0px white, 
+        -1.1px -1.1px 0px white; 
+}
+
 .card-list-container {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    z-index: 1;
 }
 
 .card-list-item {
-    flex-basis: 430px;
-    margin: 10px;
+    flex-basis: 100px;
+    margin: 20px;
+    perspective: 1000px;  /* The perspective for my 3D effect */
 }
 
-img {
-    max-width: 100px;
+.card-list-container img {
+    width: 250px;
     height: auto;
+    transition: transform 0.5s ease; 
+    transform-origin: center; 
+}
+
+.card-list-container img:hover {
+    /* I got this hover inspiration from: https://codepen.io/gayane-gasparyan/pen/wvxewXO */
+    transform: perspective(1500px) translateY(-5%) rotateX(25deg) translateZ(0);
+}
+
+.heroes-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    z-index: 1;
+}
+
+.hero {
+    display: flex;
+    position: relative;
+    width: 400px; /* set a fixed width for the hero container */
+    margin: 20px;
+}
+
+.heroes-item {
+    position: relative; 
+}
+
+.heroes-item img {
+    width: 100%;
+    height: auto; 
+    opacity: 100%;
+    transition: 0.5s ease; 
+    transform-origin: center; 
+}
+
+.heroes-name {
+    position: absolute;
+    top: 0%; 
+    width: 100%;
+    text-align: center;
+    line-height: 100px;
+    font-weight: bold;
+    font-size: 100px;
+    opacity: 0%;
+    transition: 1s ease;
+}
+
+.hero:hover .heroes-name {
+    opacity: 100%;
+    text-shadow: -2px 100px 17px grey;
+    top: -35%;
+}
+
+.hero:hover .heroes-item img {
+    opacity: 20%;
+    /* I got this hover inspiration from: https://codepen.io/gayane-gasparyan/pen/wvxewXO */
+    transform: perspective(1500px) translateY(-5%) rotateX(45deg) translateZ(0);
+}
+
+/* one hero profile */
+.one-hero-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    z-index: 1;
+}
+
+/* .one-hero-container img {
+    width: 200px;
+    height: auto; 
+    opacity: 100%;
+    border: 7px inset black;
+} */
+/* end of one hero profile */
+
+/* for search bar */
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+.search-form {
+    display: flex;
+    background-color: #fff;
+    padding: 20px;
+    padding-left: 300px;
+    padding-right: 400px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+}
+
+.search-form h2 {
+    margin-right: 100px;
+    font-weight: normal;
+}
+
+.search-form input[type="text"] {
+    flex-grow: 1;
+    width: 300px;
+    border: none;
+    border-bottom: 1px solid black;
+    font-size: 16px;
+    padding: 5px;
+    margin-left: 9px;
+}
+
+.search-table td, th {
+    padding-bottom: 20px;
+    text-align: left;
+}
+
+.search-form input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    margin-left: 2px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-form input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+/* for game page */
+.game-status {
+    text-align: center;
+    transition: opacity 0.5s;
+}
+
+.game-container {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    z-index: 1;
+}
+
+.hider-container, .seeker-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    gap: 20px;
+}
+
+.hider-image img, .seeker-image img {
+    /* circle photo */
+    border-radius: 50%;
+    border: 4px solid black;
+    width: 200px;
+    height: 200px;
+    opacity: 1;
+    transition: border-color 1s ease-in-out;
+}
+
+.hider-plays img, .seeker-plays img {
+    width: 250px;
+    height: auto;
+    animation: scaleIn 1s ease-in-out;
+}
+
+@keyframes scaleIn {
+	0% {
+		transform: scaleY(0);
+		transform-origin: 100% 0%;
+	}
+
+	100% {
+		transform: scaleY(1);
+		transform-origin: 100% 0%;
+	}
+}
+
+.hider-buttons {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 70px;
+}
+
+/* I got this button CSS style from https://getcssscan.com/css-buttons-examples */
+.hider-buttons button {
+  --b: 3px;   /* border thickness */
+  --s: .45em; /* size of the corner */
+  --color: #373B44;
+  
+  padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+  color: var(--color);
+  --_p: var(--s);
+  background:
+    conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
+    var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+  transition: .3s linear, color 0s, background-color 0s;
+  outline: var(--b) solid #0000;
+  outline-offset: .6em;
+  font-size: 16px;
+
+  border: 0;
+
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.hider-buttons button:hover,
+.hider-buttons button:focus-visible{
+  --_p: 0px;
+  outline-color: var(--color);
+  outline-offset: .05em;
+}
+
+.hider-buttons button:active {
+  background: var(--color);
+  color: #fff;
+}
+
+#continue-btn {
+    margin-top: -50px;
+}
+
+  
+/* .background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('images/background5.jpg');
+    animation: gradientShift 10s ease infinite;
+    z-index: -1;
+} 
+
+@keyframes gradientShift {
+0% {
+    background-position: 0% 50%;
+}
+25% {
+    background-position: 50% 100%;
+}
+50% {
+    background-position: 50% 50%;
+}
+75% {
+    background-position: 50% 100%;
+}
+100% {
+    background-position: 0% 50%;
+}
+} */
+
+
+/* start of show profile view */
+.muddy-body {
+    background-image: url('images/background32.png');
+    background-size: cover;
+}
+
+.pie-chart {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    
+}
+
+.pie-chart-item {
+    border: 10px solid #dd5341;
+    margin-top: 50px;
+    background-color: #dd5341;
+    box-shadow: 0px 2px 4px hsl(0 0% 0% / 25%);
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    /* gap: 200px; */
+    padding-left: 150px;
+    padding-right: 150px;
+    
+}
+
+.profile-title {
+    text-align: left;
+    margin-left: 170px;
+}
+
+
+.profile-table {
+    padding: 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    /* I got the inspiration and some part of code of this rotating rainbow border from https://codepen.io/nocksock/pen/zYQVmwG */
+    --border-angle: 0deg;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 2px 4px hsl(0 0% 0% / 25%);
+    /* animation: border-angle-rotate 2s infinite linear; */
+    border: 0.5rem solid transparent;
+    position: relative;
+    background: url('images/background12.png') 70% 0% padding-box,
+        conic-gradient(
+            from var(--border-angle),
+            oklch(100% 100% 0deg),
+            oklch(100% 100% 45deg),
+            oklch(100% 100% 90deg),
+            oklch(100% 100% 135deg),
+            oklch(100% 100% 180deg),
+            oklch(100% 100% 225deg),
+            oklch(100% 100% 270deg),
+            oklch(100% 100% 315deg),
+            oklch(100% 100% 360deg)
+            )
+            border-box; 
+    background-blend-mode: hard-light;   
+}
+
+/* I got the inspiration and some part of code of this rotating rainbow border from https://codepen.io/nocksock/pen/zYQVmwG */
+@keyframes border-angle-rotate {
+    from { --border-angle: 0deg; }
+    to { --border-angle: 360deg; }
+}
+
+/* I got the inspiration and some part of code of this rotating rainbow border from https://codepen.io/nocksock/pen/zYQVmwG */
+@property --border-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+  
+
+.profile-table td {
+    padding: 20px;
+    
+}
+
+.table-fields {
+    font-family: "DotGothic16", sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: .2em;
+}
+
+.favorite-card-container {
+    padding: -50px;
+    /* I got the inspiration and some part of code of this rotating rainbow border from https://codepen.io/nocksock/pen/zYQVmwG */
+    --border-angle: 0deg;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 2px 4px hsl(0 0% 0% / 25%);
+    animation: border-angle-rotate 2s infinite linear;
+    transition: 2s ease;
+    border: 0.5rem solid transparent;
+    border-radius: 22px;
+    position: relative;
+    background: linear-gradient(white, white) padding-box,
+      conic-gradient(
+          from var(--border-angle),
+          oklch(100% 100% 0deg),
+          oklch(100% 100% 45deg),
+          oklch(100% 100% 90deg),
+          oklch(100% 100% 135deg),
+          oklch(100% 100% 180deg),
+          oklch(100% 100% 225deg),
+          oklch(100% 100% 270deg),
+          oklch(100% 100% 315deg),
+          oklch(100% 100% 360deg)
+        )
+        border-box;
+}
+
+.favorite-card-container img {
+    /* height: 400px;
+    width: auto; */
+    height: 350px;
+    width: 250px;
+}
+
+.favorite-card-container:hover {
+    box-shadow: 0px 2px 4px hsl(0 0% 0%);
+    /* I got this hover inspiration from: https://codepen.io/gayane-gasparyan/pen/wvxewXO */
+    transform: perspective(1500px) translateY(-5%) rotateX(25deg) translateZ(0);
+}
+
+.profile-cards {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+.logout-button-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 50px;
+    margin-top: 50px;
+}
+
+.update-profile-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding-left: 150px;
+    padding-right: 150px;
+}
+
+.click-button {   
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+    border: 3px solid black;
+    background-color: #f37d59;
+    padding: 10px;
+    transition: 1s ease;
+    box-shadow: 0px 2px 4px hsl(0 0% 0%/ 50%);
+}
+
+.click-button:hover {
+    background-color: #dd5341;
+    box-shadow: 0px 2px 4px hsl(0 0% 0%);
+}
+/* end of show profile view */
+
+/* start of leaderboard views */
+
+.leaderboard-subtitle {
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: .2em;
+    margin-left: 50vw;
+}
+
+.leaderboard-table-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding-left: 150px;
+    padding-right: 150px;
+    margin-top: 50px;
+}
+
+.leaderboard-table {
+    padding: 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+    padding-right: 0px;
+    width: 500px;
+    border-collapse: separate;
+    border-spacing: 50px 5px;
+
+    /* I got the inspiration and some part of code of this rotating rainbow border from https://codepen.io/nocksock/pen/zYQVmwG */
+    --border-angle: 0deg;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: left;
+    box-shadow: 0px 2px 4px hsl(0 0% 0% / 25%);
+    /* animation: border-angle-rotate 2s infinite linear; */
+    border: 0.5rem solid transparent;
+    position: relative;
+    background: url('images/background12.png') 70% 0% padding-box,
+        conic-gradient(
+            from var(--border-angle),
+            oklch(100% 100% 0deg),
+            oklch(100% 100% 45deg),
+            oklch(100% 100% 90deg),
+            oklch(100% 100% 135deg),
+            oklch(100% 100% 180deg),
+            oklch(100% 100% 225deg),
+            oklch(100% 100% 270deg),
+            oklch(100% 100% 315deg),
+            oklch(100% 100% 360deg)
+            )
+            border-box; 
+    background-blend-mode: hard-light; 
+}
+
+.leaderboard-table td, th {
+    padding: 20px;
+}
+
+.leaderboard-buttons-container {    
+    display: flex;
+    flex-direction: column;
+    align-items: top;
+    /* justify-content: top; */
+    gap: 40px;
+}
+
+/* tbody {
+    padding-left: 30px;
+} */
+
+/* end of leaderboard views */
+
+
+/* start of create game view */
+
+.create-game-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding-left: 150px;
+    padding-right: 150px;
+    margin-top: 50px;
+
+    /* I got the inspiration and some part of code of this rotating rainbow border from https://codepen.io/nocksock/pen/zYQVmwG */
+    --border-angle: 0deg;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: left;
+    box-shadow: 0px 2px 4px hsl(0 0% 0% / 25%);
+    /* animation: border-angle-rotate 2s infinite linear; */
+    border: 0.5rem solid transparent;
+    position: relative;
+    background: url('images/background12.png') 70% 0% padding-box,
+        conic-gradient(
+            from var(--border-angle),
+            oklch(100% 100% 0deg),
+            oklch(100% 100% 45deg),
+            oklch(100% 100% 90deg),
+            oklch(100% 100% 135deg),
+            oklch(100% 100% 180deg),
+            oklch(100% 100% 225deg),
+            oklch(100% 100% 270deg),
+            oklch(100% 100% 315deg),
+            oklch(100% 100% 360deg)
+            )
+            border-box; 
+    background-blend-mode: hard-light; 
+}
+
+
+.how-to-play-title {
+    font-family: 'gunplay';
+    letter-spacing: .2em;
+    font-size: 32px;
+}
+
+.how-to-play {
+    /* background-color: white; */
+    padding: 35px;
+    padding-top: 10px;
+    padding-bottom: 65px;
+    
+    /* I got the inspiration and some part of code of this rotating rainbow border from https://codepen.io/nocksock/pen/zYQVmwG */
+    --border-angle: 0deg;
+    border-radius: 12px;
+    box-shadow: 0px 2px 4px hsl(0 0% 0% / 25%);
+    /* animation: border-angle-rotate 2s infinite linear; */
+    /* border: 0.5rem solid transparent; */
+    border: 10px solid #ffffff;
+    position: relative;
+    background: url('images/background12.png') 70% 0% padding-box,
+        conic-gradient(
+            from var(--border-angle),
+            oklch(100% 100% 0deg),
+            oklch(100% 100% 45deg),
+            oklch(100% 100% 90deg),
+            oklch(100% 100% 135deg),
+            oklch(100% 100% 180deg),
+            oklch(100% 100% 225deg),
+            oklch(100% 100% 270deg),
+            oklch(100% 100% 315deg),
+            oklch(100% 100% 360deg)
+            )
+            border-box; 
+    background-blend-mode: screen; 
+    transition: 5s ease;
+}
+
+.how-to-play:hover {
+    /* move to the right */
+    transform: translateX(100px);
+}
+
+.create-game-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.hider-text, .seeker-text {
+    font-weight: bold;
+    /* font-family: 'Rocher', sans-serif; */
+    font-size: 20px;
+    transition: 1.5s ease;
+    cursor: pointer;
+}
+
+.hider-text:hover, .seeker-text:hover {
+    /* color: #764838;
+    font-size: 22px; */
+    /* text-shadow: 0px 2px 4px hsl(0 0% 0%/ 50%); */
+
+    text-shadow: 10px 2px 4px hsl(0 0% 0%/ 50%);
+}
+
+.number-text {
+    font-family: 'rocher';
+    font-size: 25px;
+    transition: 1.5s ease;
+    cursor: pointer;
+}
+
+.number-text:hover {
+    font-palette: --Mint;
+}
+
+.button-p-text {
+    /* font-size: 20px; */
+    border: 1px solid black;
+    transition: 1.5s ease;
+    cursor: pointer;
+}
+
+.button-p-text:hover {
+    color: white;
+    background-color: black;
 }
