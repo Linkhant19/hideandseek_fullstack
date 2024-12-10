@@ -3,6 +3,8 @@
 {% extends 'game/base.html' %}
 
 {% block content %}
+
+<!-- Start of logged out content -->
 <div class="logged-out-container">
     <h2>LOGGED OUT!</h2>
     <br>
@@ -10,5 +12,6 @@
     <a class="click-button" href="{% url 'login' %}">Login</a>
     <a class="click-button" href="{% url 'main' %}">Main Menu</a>
 </div>
+<!-- End of logged out content -->
 
 {% endblock %}

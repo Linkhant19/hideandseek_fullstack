@@ -22,11 +22,11 @@
 body {
     margin-top: 25px;
     font-family: 'Space Grotesk', sans-serif;
-    /* font-family: 'kamikaze'; */
     padding: 0px;
     background-color: #faca78;
 }
 
+/* this is the beginning of my main page. */
 h3 {
     text-align: center;
     font-family: 'rocher';
@@ -108,13 +108,11 @@ h3 {
     position: absolute;
     z-index: 1;
     margin-top: 165px;
-    /* font-family: 'Times New Roman', Times, serif; */
     font-family: 'rocher';
     font-palette: --Mint;
     font-size: 50px;
     color: #faca78;
     left: 50%;
-    /* transform: translateX(-120px); */
     text-shadow: none;
     transition: 1.5s ease;
 }
@@ -229,7 +227,6 @@ h3 {
     }
 }
 
-
 @keyframes flash {
     0% {
       background-color: #fff;
@@ -254,23 +251,27 @@ header {
 header img {
     height: 70px;
     width: auto;
-    /* margin-right: -20px; */
 }
 
 nav {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 nav a {
-    margin: 37px;
-    margin-top: 15px;
+    width: 9vw;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 37px;
+    margin-left: 5px;
     color: black;
     text-decoration: none;
 }
 
 nav img {
-    margin-top: 10px;
+    margin-top: 0px;
+    margin-left: 20px;
 }
 
 /* To improve: it currently moves the other text on hover because the font is not the same size. */
@@ -291,7 +292,7 @@ nav a.active {
 }
 
 .profile-header {
-    margin-left: 485px;
+    margin-left: 490px;
 }
 /* end of header and nav bar css */
 
@@ -392,6 +393,7 @@ h1 {
     /* I got this hover inspiration from: https://codepen.io/gayane-gasparyan/pen/wvxewXO */
     transform: perspective(1500px) translateY(-5%) rotateX(45deg) translateZ(0);
 }
+/* end of showing cards.  */
 
 
 /* beginning of the one hero page */
@@ -421,7 +423,7 @@ h1 {
 }
 /* end of the one hero page */
 
-/* for search bar */
+/* start of search bar */
 .search-container {
     display: flex;
     align-items: center;
@@ -438,8 +440,6 @@ h1 {
     padding: 20px;
     padding-left: 300px;
     padding-right: 400px;
-    /* border-radius: 20px; */
-    /* box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3); */
 }
 
 .search-form h2 {
@@ -475,11 +475,11 @@ h1 {
 .search-form input[type="submit"]:hover {
     background-color: #0056b3;
 }
+/* end of search bar */
 
 
 
-
-/* for game page */
+/* start of game page */
 .game-status {
     text-align: center;
     transition: filter 1s ease;
@@ -511,7 +511,6 @@ h1 {
 
 .hider-image img, .seeker-image img {
     /* circle photo */
-    
     border-radius: 50%;
     border: 4px solid black;
     width: 200px;
@@ -531,7 +530,6 @@ h1 {
     font-size: 40px;
     font-palette: --Mint;
 }
-
 
 @keyframes scaleIn {
 	0% {
@@ -596,7 +594,6 @@ h1 {
     margin-top: 0px;
     text-decoration: none;
 }
-
 /* end of game page */
 
 
@@ -621,7 +618,6 @@ h1 {
 
 
 /* start of show profile view */
-
 .pie-chart {
     display: flex;
     flex-direction: row;
@@ -643,22 +639,20 @@ h1 {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    /* gap: 200px; */
     padding-left: 150px;
     padding-right: 150px;
-    
 }
 
 .profile-title {
     text-align: left;
-    margin-left: 170px;
+    margin-left: 171px;
 }
-
 
 .profile-table {
     padding: 10px;
     padding-top: 30px;
     padding-bottom: 30px;
+    min-width: 500px;
 
     /* I got the inspiration and some part of code of this rotating rainbow border from https://codepen.io/nocksock/pen/zYQVmwG */
     --border-angle: 0deg;
@@ -667,7 +661,6 @@ h1 {
     justify-content: center;
     align-items: center;
     box-shadow: 0px 2px 4px hsl(0 0% 0% / 25%);
-    /* animation: border-angle-rotate 2s infinite linear; */
     border: 0.5rem solid transparent;
     position: relative;
     background: url('images/background12.png') 70% 0% padding-box,
@@ -700,7 +693,6 @@ h1 {
     inherits: false;
 }
   
-
 .profile-table td {
     padding: 20px;
     
@@ -801,8 +793,8 @@ h1 {
 }
 /* end of show profile view */
 
-/* start of leaderboard views */
 
+/* start of leaderboard views */
 .leaderboard-subtitle {
     font-weight: 900;
     font-size: 20px;
@@ -838,7 +830,6 @@ h1 {
     justify-content: space-between;
     align-items: left;
     box-shadow: 0px 2px 4px hsl(0 0% 0% / 25%);
-    /* animation: border-angle-rotate 2s infinite linear; */
     border: 0.5rem solid transparent;
     position: relative;
     background: url('images/background12.png') 70% 0% padding-box,
@@ -866,15 +857,12 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: top;
-    /* justify-content: top; */
     gap: 40px;
 }
-
 /* end of leaderboard views */
 
 
 /* start of create game view */
-
 .create-game-container {
     display: flex;
     flex-direction: row;
@@ -910,7 +898,6 @@ h1 {
             border-box; 
     background-blend-mode: hard-light; 
 }
-
 
 .how-to-play-title {
     font-family: 'gunplay';
@@ -966,7 +953,6 @@ h1 {
 
 .hider-text, .seeker-text {
     font-weight: bold;
-    /* font-family: 'Rocher', sans-serif; */
     font-size: 20px;
     transition: 1.5s ease;
     cursor: pointer;
@@ -989,7 +975,6 @@ h1 {
 }
 
 .button-p-text {
-    /* font-size: 20px; */
     border: 1px solid black;
     transition: 1.5s ease;
     cursor: pointer;
@@ -999,7 +984,6 @@ h1 {
     color: white;
     background-color: black;
 }
-
 /* end of create game view */
 
 
@@ -1025,6 +1009,17 @@ h1 {
 }
 /* end of log out and log in view */
 
+/* start of post card upload and delete view */
+
+.post-card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin: 50px;
+}
+
+/* end of post card upload and delete view */
 
 /* these are my different body backgrounds. */
 .light-body {
@@ -1072,3 +1067,4 @@ h1 {
     background-size: cover;
     background-blend-mode: normal;
 }
+/* end of my different body backgrounds */

@@ -11,6 +11,13 @@
         <header> 
             <nav>
                 <!-- nav bar links! -->
+                <!-- I have a logo for main page
+                        show all cards page
+                        hider classes page
+                        seeker classes page 
+                        create game page
+                        leaderboard page 
+                    that are always accessible from the nav bar -->
                 <a href="{% url 'main' %}"><img src="{% static 'images/logo5.gif' %}" alt="logo"></a>
                 <a href="{% url 'show_all_cards' %}" class="{% if request.path == '/show_all_cards/' %}active{% endif %}">All Cards</a>
                 <a href="{% url 'show_all_hiders' %}" class="{% if request.path == '/hiders/' %}active{% endif %}">Hiders</a>
@@ -19,13 +26,12 @@
                 <a href="{% url 'leaderboard_by_games_won' %}" class="{% if request.path == '/leaderboard_by_games_won/' %}active{% elif request.path == '/leaderboard_by_games_played/' %}active{% elif request.path == '/leaderboard_by_win_rate/' %}active{% endif %}">Leaderboard</a>
 
 
-
-
                 <!-- Improvement idea: show user profile picture if logged in. -->
                 {% if user.is_authenticated %}
                     <!-- redirects to this specific user's profile -->
                     <a class="profile-header" href="{% url 'show_profile' user.profile.pk %}">Profile</a>
                 {% else %}
+                    <!-- else we redirect to login page -->
                     <a class="profile-header" href="{% url 'login' %}">Login</a>
                 {% endif %}
             </nav>

@@ -5,6 +5,7 @@
 {% extends 'game/base.html' %}
 
 {% block content %}
+    <!-- start of one seeker page -->
     <div class="background"></div>
     <h1>{{ seeker.class_name }}</h1>
     <div class="one-hero-container">
@@ -16,7 +17,9 @@
 
         </div>
     </div>
+    
     <br>
+
     <!-- show all cards of the seeker -->
     <h1 class="one-hero-card-title">Cards</h1>
     <div class="card-list-container">
@@ -24,6 +27,7 @@
             <div class="card-list-item"><img src="{{ hand.card.image.url }}" alt="{{ card.card_name }}"></div>
         {% endfor %}
     </div>
+    <!-- end of one seeker page -->
     
 {% endblock %}
 

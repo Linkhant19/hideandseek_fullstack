@@ -7,7 +7,7 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
-    # main.html link
+    # main.html link. users will see this when they open my page
     path('', views.MainView.as_view(), name='main'),
 
     path(r'show_all_cards/', views.ShowAllCards.as_view(), name='show_all_cards'), # currently my main page
@@ -27,7 +27,7 @@ urlpatterns = [
     path(r'delete_upload_card/<int:pk>', views.DeleteUploadCardView.as_view(), name='delete_upload_card'), # page for deleting an upload card
     path(r'create_upload_card/', views.CreateUploadCardView.as_view(), name='create_upload_card'), # page for creating an upload card
     
-
+    # login and logout paths
     path(r'login/', auth_views.LoginView.as_view(template_name='game/login.html'), name='login'),
     path(r'logout/', auth_views.LogoutView.as_view(template_name='game/logged_out.html'), name='logout'),
 ]

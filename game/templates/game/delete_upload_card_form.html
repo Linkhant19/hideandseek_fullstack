@@ -3,14 +3,18 @@
 {% extends 'game/base.html' %}
 
 {% block content %}
-<h1>Delete Upload Card</h1>
+    <h1>Delete Card?</h1>
 
-<form method="post">
-    {% csrf_token %}
-    <p>Are you sure you want to delete "{{ uploadcard.card_name }}"?</p>
-    <a class="click-button" href="#" onclick="this.parentNode.submit()">Delete</a>
+    <!-- form to delete upload card. -->
+    <div class="post-card-container">
+        <form method="post">
+            {% csrf_token %}
+            <p>Are you sure you want to delete "{{ uploadcard.card_name }}"?</p>
+            <a class="click-button" href="#" onclick="this.parentNode.submit()">Delete</a>
+        
+            <!-- link to cancel -->
+            <a class="click-button" href="{% url 'show_profile' user.profile.pk %}">Cancel</a>
+        </form>
+    </div>
 
-    <!-- link to cancel -->
-    <a class="click-button" href="{% url 'show_profile' user.profile.pk %}">Cancel</a>
-</form>
 {% endblock %}

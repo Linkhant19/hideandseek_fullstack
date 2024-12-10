@@ -3,26 +3,33 @@
 {% extends 'game/base.html' %}
 
 {% block content %}
-    <div class="background"></div>
     <h1>Create Card</h1>
-    <form method="post" enctype="multipart/form-data">
-        <table>
-            {{ form.as_table }}
-        </table>
-        <tr>
-            <td></td>
-            <td>
-                <a class="click-button" href="#" onclick="this.parentNode.submit()">Create</a>
-                {% csrf_token %}            
-            </td>
-        </tr>
-        <tr>
-            <!-- link to cancel -->
-            <td>
-                <a class="click-button" href="{% url 'show_profile' user.profile.pk %}">Cancel</a>
-            </td>
-        </tr>
-        </table>
-    </form>
+
+    <!-- upload a custom card. The form asks:
+        - name
+        - description
+        - image
+    -->
+    <div class="post-card-container">
+        <form method="post" enctype="multipart/form-data">
+            <table>
+                {{ form.as_table }}
+            </table>
+            <tr>
+                <td></td>
+                <td>
+                    <a class="click-button" href="#" onclick="this.parentNode.submit()">Create</a>
+                    {% csrf_token %}            
+                </td>
+            </tr>
+            <tr>
+                <!-- link to cancel -->
+                <td>
+                    <a class="click-button" href="{% url 'show_profile' user.profile.pk %}">Cancel</a>
+                </td>
+            </tr>
+            </table>
+        </form>
+    </div>
     
 {% endblock %}

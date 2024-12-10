@@ -9,16 +9,19 @@
         <!-- Game Status -->
         <h2 class="game-status" id="game-status">Current Turn: 0</h2>
 
+        <!-- Hider has 2 options: hide or play -->
         <div class="hider-buttons">
             <button id="hide-btn">HIDE</button>
 
             <button id="play-btn">PLAY</button>    
         </div>
-
+        
+        <!-- when game is over, show continue button -->
         <div class="hider-buttons">
             <a href="{% url 'game_over' game.pk %}"><button id="continue-btn" style="display: none;">Continue</button></a>
         </div>
 
+        <!-- Start of the game view container -->
         <div class="game-container">
             <div class="hider-container">
                 <div class="hider-class-name">
@@ -46,8 +49,10 @@
                 </div>
             </div>
         </div>
+        <!-- End of the game view container -->
 
         <!-- not sure if I should show these. They flood the interface -->
+        <!-- these cards are not displayed, but needed to get the cards for the javascript -->
         <div id="hider-card-list" class="card-list-container" style="display: none;">
             {% for card in hider_cards %}
                 <div class="card-list-item">
@@ -81,7 +86,6 @@
             // variable to keep track of how many consective turns hider has hidden
             hiddenTurns: 0,
 
-
             /* 
             these variables relate to hider status
             */
@@ -89,7 +93,6 @@
             isShielded: false,
             // variable to keep track of if hider is frozen. 
             isFrozen: 0,
-
 
             /* 
             these variables relate to seeker status
@@ -100,6 +103,10 @@
 
         // My play Button Logic
         document.getElementById("play-btn").addEventListener("click", () => {
+            /* 
+            Play Button Logic
+            */     
+
             // Update Hider Card Played to none
             const hiderCardPlayedElement = document.getElementById("hider-card-played");
             hiderCardPlayedElement.innerHTML = "";
@@ -141,6 +148,10 @@
 
         // My hide Button Logic
         document.getElementById("hide-btn").addEventListener("click", () => {
+            /* 
+            Hide Button Logic
+            */     
+
             // Update Hider Card Played to none
             const hiderCardPlayedElement = document.getElementById("hider-card-played");
             hiderCardPlayedElement.innerHTML = "";
@@ -218,7 +229,8 @@
 
             // we choose a random card
             const randomCard = seekerCards[Math.floor(Math.random() * seekerCards.length)];
-
+            
+            // returning the random card: name, type, and image
             return {
                 name: randomCard.getAttribute("alt"),
                 type: randomCard.getAttribute("data-card-type"),
@@ -337,6 +349,8 @@
         }
 
     </script>
+    <!-- end of my javascript -->
+
 {% endblock %}
 
 </body>

@@ -1,40 +1,36 @@
 <!-- game/templates/game/game_over.html -->
 
 <body class="blue-body">
-    
-{% extends 'game/base.html' %}
+    {% extends 'game/base.html' %}
 
-{% block content %}
-    <div class="background"></div>
-    <h1>GAME OVER</h1>
+    {% block content %}
+        <!-- game over screen -->
+        <div class="background"></div>
+        <h1>GAME OVER</h1>
 
-    <div class="game-over-container">
-        <!-- display the result -->
-        <div class="game-over-result">
-            {{ result }}
-        </div>
-        
-        
-        <div class="game-over-buttons">
-            <!-- play again button -->
-            <div>
-                <form action="{% url 'create_game' %}">
-                    <input class="click-button" type="submit" value="Play Again">
-                </form>
+        <div class="game-over-container">
+            <!-- display the result -->
+            <div class="game-over-result">
+                {{ result }}
             </div>
             
+            
+            <div class="game-over-buttons">
+                <!-- play again button -->
+                <div>
+                    <form action="{% url 'create_game' %}">
+                        <input class="click-button" type="submit" value="Play Again">
+                    </form>
+                </div>
+                
 
-            <!-- if our users want to check their profile. -->
-            <div>
-                <form action="{% url 'show_profile' user.profile.pk %}">
-                    <input class="click-button" type="submit" value="Check Profile">
-                </form>
-            </div>
+                <!-- if our users want to check their profile. -->
+                <div>
+                    <form action="{% url 'show_profile' user.profile.pk %}">
+                        <input class="click-button" type="submit" value="Check Profile">
+                    </form>
+                </div>
+            </div>    
         </div>
-        
-    </div>
-    
-
-{% endblock %}
-
+    {% endblock %}
 </body>

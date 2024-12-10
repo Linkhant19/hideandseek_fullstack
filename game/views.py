@@ -5,7 +5,6 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from . models import *
-
 from . forms import *
 
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
@@ -173,6 +172,7 @@ class ShowProfileView(DetailView):
         return reverse('game:show_profile', kwargs={'pk': self.object.pk})
 
     def get_context_data(self, **kwargs):
+        '''override get_context_data to add add_to_decks to context'''
         context = super().get_context_data(**kwargs)
 
         # calculate games lost
@@ -438,11 +438,13 @@ class CreateUploadCardView(LoginRequiredMixin, CreateView):
         return context
 
     def form_valid(self, form):
+        ''' this method exectues after form submission.'''
         profile = self.request.user.profile
         form.instance.profile = profile
         return super().form_valid(form)
 
     def get_success_url(self):
+        '''return URL to redirect to the show_profile page'''
         return reverse('show_profile', kwargs={'pk': self.object.profile.pk})
 
     def get_object(self):

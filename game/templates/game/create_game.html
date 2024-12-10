@@ -12,6 +12,8 @@
     <p></p>
 
     <div class="create-game-container"> 
+
+        <!-- how to play -->
         <div class="how-to-play">
             <h2 class="how-to-play-title">How to Play</h2>
             <br>
@@ -23,6 +25,10 @@
             <p>If Seeker Attack! and you are not hidden, you lose!</p>
             <p>Good luck!</p>
         </div>
+
+        <!-- create game form. It asks for: 
+        - one hider class 
+        - one seeker class -->
         <div class="create-game-form">
             <form method="post">
                 <table>
@@ -33,7 +39,8 @@
                 {% csrf_token %}
             </form>
 
-            <a class="click-button" href="{% url 'show_all_cards' %}">CANCEL</a>
+            <!-- I was contemplating adding a cancel button, but I don't feel it is necessary. -->
+            <!-- <a class="click-button" href="{% url 'show_all_cards' %}">CANCEL</a> -->
             </div>
                 
 

@@ -4,8 +4,11 @@
 
 
   {% block content %}
+    <!-- start of profile page -->
     <div class="background"></div>
     <h1 class="profile-title">PROFILE</h1>
+
+    <!-- start of profile stats container -->
     <!-- username, email, games played, games won -->
     <div class="profile-container">
         <table class="profile-table">
@@ -30,7 +33,9 @@
               <td class="table-results">{{ games_lost }}</td>
             </tr>
           </table>
+      <!-- end of profile stats container -->
 
+      <!-- start of profile cards container -->
         <div class="profile-cards">
             <!-- show profile's favorite card if it exists -->
             {% if profile.favorite_card %}
@@ -54,6 +59,7 @@
                 {% endif %}
             {% endif %}
         </div>
+        <!-- end of profile cards container -->
         
     </div>
 
@@ -73,7 +79,7 @@
       {% endif %}
     </div>
 
-    <!-- pie chart of hiders and seekers played -->
+    <!-- start of pie chart of hiders and seekers played -->
     <div class="pie-chart">
         <div class="pie-chart-item">
             {% if graph_pie_hider %}
@@ -86,10 +92,10 @@
                 {{ graph_pie_seeker|safe }}
             {% endif %}
         </div>
-        
     </div>
+    <!-- end of pie chart of hiders and seekers played -->
 
-    <!-- logout button -->
+    <!-- logout button. if user is logged in and owns the profile -->
     {% if request.user.is_authenticated %}
       {% if request.user == profile.user %}
         <div class="logout-button-container">
@@ -103,6 +109,8 @@
         </div>
       {% endif %}
     {% endif %}
+
+    <!-- end of profile page -->
     
   {% endblock %}  
 </body>

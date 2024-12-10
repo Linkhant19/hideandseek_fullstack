@@ -5,10 +5,10 @@
 {% extends 'game/base.html' %}
 
 {% block content %}
-    <div class="background"></div>
+    <!-- Start of all cards page -->
     <h1>CARDS</h1>
 
-    <!-- my search bar -->
+    <!-- include my search bar -->
     <div>
         {% include 'game/search.html' %}
     </div>
@@ -16,12 +16,15 @@
 
     <ul>
         <div class="card-list-container">
+            <!-- loop through all cards -->
             {% for card in cards %}
             <!-- show the image of the card -->
             <div class="card-list-item"><img src="{{ card.image.url }}" alt="{{ card.card_name }}"></div>
             {% endfor %}
         </div>
     </ul>
+
+    <!-- End of all cards page -->
     
 {% endblock %}
 

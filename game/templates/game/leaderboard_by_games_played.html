@@ -5,6 +5,7 @@
 {% extends 'game/base.html' %}
 
 {% block content %}
+    <!-- Start of leaderboard content -->
     <h1>LEADERBOARD</h1>
     <p class="leaderboard-subtitle">...by games played</p>
     
@@ -14,6 +15,8 @@
                 <th>Name</th>
                 <th>Games Played</th>
             </tr>
+
+            <!-- loop through profiles. they are already ordered as needed -->
             {% for profile in profiles %}
                 <tr>
                     <!-- link to show_profile -->
@@ -22,6 +25,8 @@
                 </tr>
             {% endfor %}
         </table>
+
+        <!-- link to other leaderboards -->
         <div class="leaderboard-buttons-container">
             <div>
                 <a class='click-button' href="{% url 'leaderboard_by_games_won' %}">by games won</a>
@@ -34,6 +39,7 @@
             </div>
         </div>
     </div>
+    <!-- End of leaderboard content -->
     
 {% endblock %}
 

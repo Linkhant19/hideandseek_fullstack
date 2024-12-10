@@ -2,16 +2,17 @@
 
 <body class="pink-body">
     
-
 {% extends 'game/base.html' %}
 
 {% block content %}
+    <!-- Start of all hiders page -->
     <div class="background"></div>
     <h1>HIDERS</h1>
     <!-- ultimately, I will change the view design of the heroes to be different from cards. -->
     <div class="heroes-container">
+        <!-- loop through all hiders -->
         {% for hider in hiders %}
-            <!-- show the image of the hero -->
+            <!-- show the image of the hider -->
             <div class="hero">
                 <div class="heroes-item">
                     <a href="{% url 'show_hider' hider.pk %}">
@@ -22,6 +23,7 @@
             </div>
         {% endfor %}
     </div>
+    <!-- End of all hiders page -->
     
 {% endblock %}
 
