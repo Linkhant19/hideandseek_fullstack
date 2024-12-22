@@ -1,4 +1,4 @@
 # Hide and Seek
-## (an original card game)
+### (an original card game)
 
-### designed by Lin Khant Ko
+#### designed by Lin Khant Ko
